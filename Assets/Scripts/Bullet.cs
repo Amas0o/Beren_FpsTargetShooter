@@ -12,6 +12,10 @@ public class Bullet : MonoBehaviour
             script.AddDamage(10);
 
         }
+        if(collision.gameObject.tag == "Bullet")
+        {
+            return;
+        }
         Debug.Log("Collided with" + collision.gameObject.name);
         Destroy(gameObject);    
     }
