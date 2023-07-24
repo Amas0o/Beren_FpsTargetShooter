@@ -36,6 +36,9 @@ public class Gun : MonoBehaviour
     //bug fixing :D
     public bool allowInvoke = true;
 
+    //flash
+    public ParticleSystem muzzleFlash;
+
     private void Awake()
     {
         //make sure magazine is full
@@ -74,6 +77,7 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
+        muzzleFlash.Play();
         readyToShoot = false;
 
         //Find the exact hit position using a raycast
