@@ -38,6 +38,7 @@ public class Gun : MonoBehaviour
 
     //flash
     public ParticleSystem muzzleFlash;
+    AudioSource shootingSound;
 
     private void Awake()
     {
@@ -46,6 +47,10 @@ public class Gun : MonoBehaviour
         readyToShoot = true;
     }
 
+    private void Start()
+    {
+        shootingSound = GetComponent<AudioSource>();
+    }
     private void Update()
     {
         MyInput();
@@ -79,7 +84,7 @@ public class Gun : MonoBehaviour
     {
         muzzleFlash.Play();
         readyToShoot = false;
-
+        shootingSound.Play();
         //Find the exact hit position using a raycast
         //Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); //Just a ray through the middle of your current view
         //RaycastHit hit;
