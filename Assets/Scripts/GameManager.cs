@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.PackageManager;
 using UnityEngine;
 
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour
     bool bombSpawn = false;
     float upgradeSpawnTime;
     bool upgradeSpawn = false;
-
+    public TextMeshProUGUI scoreDisplay;
     private void Start()
     {
         StartCoroutine("bombSpawnCd");
@@ -67,7 +68,7 @@ public class GameManager : MonoBehaviour
             upgradeSpawn = false;
             StartCoroutine("upgradeSpawnCd");
         }
-
+        scoreDisplay.SetText(score.ToString());
 
     }
     private void Awake()
