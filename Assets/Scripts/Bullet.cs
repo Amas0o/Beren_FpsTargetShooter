@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
             script.AddDamage(10);
 
         }
-        if(collision.gameObject.tag == "Bullet")
+        if((collision.gameObject.tag == "Bullet") || (collision.gameObject.tag == "Pellet") )
         {
             return;
         }

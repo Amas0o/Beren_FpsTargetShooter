@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Target
   - Bullet
+  - Pellet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - pel
   - Water
   - UI
   - 
