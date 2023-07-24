@@ -9,12 +9,12 @@ public class Gun : MonoBehaviour
     [SerializeField] GameObject bullet;
 
     //bullet force
-    public float shootForce, upwardForce;
+    [SerializeField] float shootForce, upwardForce;
 
     //Gun stats
-    public float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
-    public int magazineSize, bulletsPerTap;
-    public bool allowButtonHold;
+    [SerializeField] float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
+    [SerializeField] int magazineSize, bulletsPerTap;
+    [SerializeField] bool allowButtonHold;
 
     int bulletsLeft, bulletsShot;
 
@@ -77,8 +77,8 @@ public class Gun : MonoBehaviour
         readyToShoot = false;
 
         //Find the exact hit position using a raycast
-        Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); //Just a ray through the middle of your current view
-        RaycastHit hit;
+        //Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); //Just a ray through the middle of your current view
+        //RaycastHit hit;
 
         //check if ray hits something
         //Vector3 targetPoint;
@@ -144,5 +144,15 @@ public class Gun : MonoBehaviour
         //Fill magazine
         bulletsLeft = magazineSize;
         reloading = false;
+    }
+
+    public void EnableFrenzy()
+    {
+        timeBetweenShooting /= 2;
+    }
+
+    public void DisableFrenzy()
+    {
+        timeBetweenShooting *= 2;
     }
 }

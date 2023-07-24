@@ -399,7 +399,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 182799798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 3, z: 5}
+  m_LocalPosition: {x: -5, y: 3, z: 5}
   m_LocalScale: {x: 1, y: 6, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -717,7 +717,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &741855490
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -967,7 +967,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1045389425
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1514,7 +1514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1313212153
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1736,6 +1736,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPrefab: {fileID: 1501084758933746, guid: 9437be881ad682348bd31aa228922027, type: 3}
+  bombPrefab: {fileID: 2595720090088871617, guid: 732e12a252da64507987819a344450d8, type: 3}
+  upgradePrefab: {fileID: 8327711790066316512, guid: 647d701883c28458a9f74fca6d2c325b, type: 3}
+  pistol: {fileID: 706400155}
+  assaultRifle: {fileID: 91358082}
+  shotgun: {fileID: 1022441124}
+  frenzyTime: 0
 --- !u!4 &1515880959
 Transform:
   m_ObjectHideFlags: 0
@@ -1925,7 +1931,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1749107583}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: 3, z: 5}
+  m_LocalPosition: {x: 6, y: 3, z: 5}
   m_LocalScale: {x: 1, y: 6, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2123,7 +2129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1981718601
 BoxCollider:
   m_ObjectHideFlags: 0

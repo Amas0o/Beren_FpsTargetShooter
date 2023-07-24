@@ -7,24 +7,59 @@ public class GameManager : MonoBehaviour
 {
     public static  GameManager instance = null;
     [SerializeField] GameObject targetPrefab;
+    [SerializeField] GameObject bombPrefab;
+    [SerializeField] GameObject upgradePrefab;
+    [SerializeField] GameObject pistol;
+    [SerializeField] GameObject assaultRifle;
+    [SerializeField] GameObject shotgun;
+    [SerializeField] float frenzyTime;
     private int score = 0;
     float x = 0;
     float z = 0;
     float y = 0;
-    bool spawn = true;
-    float spawnTime;
+    bool targetSpawn = true;
+    float targetSpawnTime;
+    float bombSpawnTime;
+    bool bombSpawn = false;
+    float upgradeSpawnTime;
+    bool upgradeSpawn = false;
+
+    private void Start()
+    {
+        StartCoroutine("bombSpawnCd");
+        StartCoroutine("upgradeSpawnCd");
+    }
     private void Update()
     {
-        if (spawn)
+        if (targetSpawn)
         {
-            x = Random.Range(-4.5f, 5.5f);
+            x = Random.Range(-3.85f, 4.85f);
             z = Random.Range(-6f, 18f);
             y = Random.Range(-0.6f, 0.6f);
             Instantiate(targetPrefab, new Vector3(x, y, z), Quaternion.Euler(90, 0, 0));
-            spawn = false;
+            targetSpawn = false;
             StartCoroutine("spawnCd");
         }
-        
+        if(bombSpawn)
+        {
+            x = Random.Range(-3.85f, 4.85f);
+            z = Random.Range(-6f, 6f);
+            y = Random.Range(0f, 1.7f);
+            Instantiate(bombPrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+            bombSpawn = false;
+            StartCoroutine("bombSpawnCd");
+        }
+        if (upgradeSpawn)
+        {
+            x = Random.Range(-3.85f, 4.85f);
+            z = Random.Range(-6f, 6f);
+            y = Random.Range(0f, 1.7f);
+            Instantiate(upgradePrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+            upgradeSpawn = false;
+            StartCoroutine("upgradeSpawnCd");
+        }
+
+
     }
     private void Awake()
     {
@@ -40,11 +75,52 @@ public class GameManager : MonoBehaviour
         Debug.Log("New Score is " + score);
     }
 
+    public void Frenzy()
+    {
+        //var pistolScript = pistol.GetComponent<Gun>();
+        //var assualtScript = assaultRifle.GetComponent<Gun>();
+        //var shotgunScript = shotgun.GetComponent<Gun>();
+
+        //pistolScript.EnableFrenzy();
+        //assualtScript.EnableFrenzy();
+        //shotgunScript.EnableFrenzy();
+
+        //StartCoroutine("FrenzyTimer");
+        Debug.Log("Frenzy enabled");
+    }
+
     IEnumerator spawnCd()
     {
         //Debug.Log("me is work");
-        spawnTime = Random.Range(3, 6);
-        yield return new WaitForSeconds(spawnTime);
-        spawn = true;
+        targetSpawnTime = Random.Range(3, 6);
+        yield return new WaitForSeconds(targetSpawnTime);
+        targetSpawn = true;
+    }
+
+    IEnumerator bombSpawnCd()
+    {
+        //Debug.Log("me is work");
+        bombSpawnTime = Random.Range(5, 10);
+        yield return new WaitForSeconds(bombSpawnTime);
+        bombSpawn = true;
+    }
+
+    IEnumerator upgradeSpawnCd()
+    {
+        //Debug.Log("me is work");
+        upgradeSpawnTime = Random.Range(10, 15);
+        yield return new WaitForSeconds(upgradeSpawnTime);
+        upgradeSpawn = true;
+    }
+    IEnumerator FrenzyTimer()
+    {
+        yield return new WaitForSeconds(frenzyTime);
+        var pistolScript = pistol.GetComponent<Gun>();
+        var assualtScript = assaultRifle.GetComponent<Gun>();
+        var shotgunScript = shotgun.GetComponent<Gun>();
+
+        pistolScript.DisableFrenzy();
+        assualtScript.DisableFrenzy();
+        shotgunScript.DisableFrenzy();
     }
 }

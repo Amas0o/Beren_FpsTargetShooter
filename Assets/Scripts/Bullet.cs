@@ -6,13 +6,25 @@ public class Bullet : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Target")
+        if(collision.gameObject.tag == "Target" )
         {
             var script = collision.gameObject.GetComponent<Target>();
             script.AddDamage(10);
 
         }
-        if((collision.gameObject.tag == "Bullet") || (collision.gameObject.tag == "Pellet") )
+        if (collision.gameObject.tag == "Bomb")
+        {
+            var script = collision.gameObject.GetComponent<Bomb>();
+            script.AddDamage(10);
+
+        }
+        if (collision.gameObject.tag == "Upgrade")
+        {
+            var script = collision.gameObject.GetComponent<Upgrade>();
+            script.AddDamage(10);
+
+        }
+        if ((collision.gameObject.tag == "Bullet") || (collision.gameObject.tag == "Pellet") )
         {
             return;
         }
