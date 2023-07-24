@@ -31,7 +31,7 @@ public class Gun : MonoBehaviour
 
     //Graphics
     //public GameObject muzzleFlash;
-    //public TextMeshProUGUI ammunitionDisplay;
+    public TextMeshProUGUI ammunitionDisplay;
 
     //bug fixing :D
     public bool allowInvoke = true;
@@ -56,8 +56,8 @@ public class Gun : MonoBehaviour
         MyInput();
 
         //Set ammo display, if it exists :D
-        //if (ammunitionDisplay != null)
-            //ammunitionDisplay.SetText(bulletsLeft / bulletsPerTap + " / " + magazineSize / bulletsPerTap);
+        if (ammunitionDisplay != null)
+            ammunitionDisplay.SetText(bulletsLeft / bulletsPerTap + " / " + magazineSize / bulletsPerTap);
     }
     private void MyInput()
     {
