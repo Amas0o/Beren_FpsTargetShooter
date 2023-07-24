@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
+  deathTime: 2
 --- !u!65 &268393553624912135
 BoxCollider:
   m_ObjectHideFlags: 0

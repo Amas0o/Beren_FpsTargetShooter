@@ -36,10 +36,7 @@ public class GameManager : MonoBehaviour
         assaultScript = assault.GetComponent<Gun>();
         shotgunScript = shotgun.GetComponent<Gun>();
 
-        if(pistolScript && assaultScript && shotgunScript)
-        {
-            Debug.Log("Koi milgya");
-        }
+        
     }
     private void Update()
     {

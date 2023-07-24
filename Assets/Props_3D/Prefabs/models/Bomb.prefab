@@ -14905,6 +14905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
+  deathTime: 4
 --- !u!1 &2706622165558107270
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] float deathTime;
+
+    private void Start()
+    {
+        StartCoroutine("Death");
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Target" )
@@ -28,7 +35,13 @@ public class Bullet : MonoBehaviour
         {
             return;
         }
-        Debug.Log("Collided with" + collision.gameObject.name);
+        //Debug.Log("Collided with" + collision.gameObject.name);
         Destroy(gameObject);    
+    }
+
+    IEnumerator Death()
+    {
+        yield return new WaitForSeconds(deathTime);
+        Destroy(gameObject);
     }
 }
