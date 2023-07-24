@@ -6,10 +6,11 @@ public class Target : MonoBehaviour
 {
     [SerializeField] float health;
     private int prospectiveScore;
-
+    [SerializeField] float deathTime;
     private void Start()
     {
         prospectiveScore = 100;
+        StartCoroutine("Death");
     }
     void Update()
     {
@@ -25,9 +26,14 @@ public class Target : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            Debug.Log("Dead " + name);
+            //Debug.Log("Dead " + name);
             GameManager.instance.AddToScore(prospectiveScore);
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator Death() { 
+        yield return new WaitForSeconds(deathTime);
+        Destroy(gameObject);
     }
 }
