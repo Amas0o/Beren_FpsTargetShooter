@@ -9,9 +9,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject targetPrefab;
     [SerializeField] GameObject bombPrefab;
     [SerializeField] GameObject upgradePrefab;
+    [SerializeField] GameObject assault;
     [SerializeField] GameObject pistol;
-    [SerializeField] GameObject assaultRifle;
     [SerializeField] GameObject shotgun;
+    Gun pistolScript;
+    Gun assaultScript;
+    Gun shotgunScript;
     [SerializeField] float frenzyTime;
     private int score = 0;
     float x = 0;
@@ -28,6 +31,15 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine("bombSpawnCd");
         StartCoroutine("upgradeSpawnCd");
+
+        pistolScript = pistol.GetComponent<Gun>();
+        assaultScript = assault.GetComponent<Gun>();
+        shotgunScript = shotgun.GetComponent<Gun>();
+
+        if(pistolScript && assaultScript && shotgunScript)
+        {
+            Debug.Log("Koi milgya");
+        }
     }
     private void Update()
     {
@@ -77,15 +89,13 @@ public class GameManager : MonoBehaviour
 
     public void Frenzy()
     {
-        //var pistolScript = pistol.GetComponent<Gun>();
-        //var assualtScript = assaultRifle.GetComponent<Gun>();
-        //var shotgunScript = shotgun.GetComponent<Gun>();
+        
 
-        //pistolScript.EnableFrenzy();
-        //assualtScript.EnableFrenzy();
-        //shotgunScript.EnableFrenzy();
+        pistolScript.EnableFrenzy();
+        assaultScript.EnableFrenzy();
+        shotgunScript.EnableFrenzy();
 
-        //StartCoroutine("FrenzyTimer");
+        StartCoroutine("FrenzyTimer");
         Debug.Log("Frenzy enabled");
     }
 
@@ -115,12 +125,9 @@ public class GameManager : MonoBehaviour
     IEnumerator FrenzyTimer()
     {
         yield return new WaitForSeconds(frenzyTime);
-        var pistolScript = pistol.GetComponent<Gun>();
-        var assualtScript = assaultRifle.GetComponent<Gun>();
-        var shotgunScript = shotgun.GetComponent<Gun>();
-
+        
         pistolScript.DisableFrenzy();
-        assualtScript.DisableFrenzy();
+        assaultScript.DisableFrenzy();
         shotgunScript.DisableFrenzy();
     }
 }
