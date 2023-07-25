@@ -10,6 +10,8 @@ public class WheelOfFortune : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
+        //Debug.Log("hit by " + collision.gameObject.name);
         int score;
         switch (gameObject.name)
         {
@@ -20,10 +22,12 @@ public class WheelOfFortune : MonoBehaviour
             default: score = 0; break;
 
         }
-
-        GameManager.instance.StopSpin();
+        var script = transform.parent.gameObject.GetComponent<WheelSpin>();
+        script.StopRotation();
         GameManager.instance.AddToScore(score);
         Debug.Log("collision on" + gameObject.name);
     }
+        
+    
 }
  

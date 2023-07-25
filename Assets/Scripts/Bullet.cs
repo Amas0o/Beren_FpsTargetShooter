@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         
-        Debug.Log(collision.gameObject.name);
+        //Debug.Log(collision.gameObject.name);
         
         if(collision.gameObject.tag == "Target" )
         {

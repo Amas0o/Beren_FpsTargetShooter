@@ -4,30 +4,23 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Spin : MonoBehaviour
+public class Wheel : MonoBehaviour
 {
     [SerializeField] float speed;
-    public bool rotation = true;
+    bool rotation;
     [SerializeField] float deathTime;
 
     private void Start()
     {
        // StartCoroutine("Death");
+       rotation = true;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (rotation)
-        {
-            transform.Rotate(Vector3.forward, speed);
-        }
-        else
-        {
-            speed -= 0.025f;
-            if (speed > 0) transform.Rotate(Vector3.forward, speed);
-            else StartCoroutine("DeathAfterCollision");
-        }
+        Debug.Log("rotation in update is " + rotation);
+        transform.Rotate(Vector3.forward, speed*Time.deltaTime);  
     }
 
     IEnumerator Death()
@@ -35,10 +28,10 @@ public class Spin : MonoBehaviour
         yield return new WaitForSeconds(deathTime);
         Destroy(gameObject);
     }
-    IEnumerator DeathAfterCollision()
-    {
-        yield return new WaitForSeconds(2f);
+    
+    public void StopRotation()
+    {   
+        Debug.Log("no more ghoomrha" + speed);
         Destroy(gameObject);
     }
-
 }

@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
     public void AddToScore(int addScore)
     {
         score += addScore;
-        Debug.Log("New Score is " + score);
+        //Debug.Log("New Score is " + score);
     }
 
     public void Frenzy()
@@ -119,11 +119,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Frenzy enabled");
     }
 
-    public void StopSpin()
-    {
-        wheelPrefab.GetComponent<Spin>().rotation = false;
-       // wheelPrefab.transform.Rotate(0, 0, 0);
-    }
+    
 
     IEnumerator spawnCd()
     {
