@@ -8,10 +8,11 @@ public class Spin : MonoBehaviour
 {
     [SerializeField] float speed;
     public bool rotation = true;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float deathTime;
+
+    private void Start()
     {
-        
+        StartCoroutine("Death");
     }
 
     // Update is called once per frame
@@ -26,6 +27,13 @@ public class Spin : MonoBehaviour
             speed -= 0.025f; 
             if (speed > 0)
                 transform.Rotate(Vector3.forward, speed);
+            else Destroy(gameObject);
         }
+    }
+
+    IEnumerator Death()
+    {
+        yield return new WaitForSeconds(deathTime);
+        Destroy(gameObject);
     }
 }

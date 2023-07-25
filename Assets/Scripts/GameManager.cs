@@ -11,10 +11,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject bombPrefab;
     [SerializeField] GameObject upgradePrefab;
     [SerializeField] GameObject barrelPrefab;
+    [SerializeField] GameObject wheelPrefab;
     [SerializeField] GameObject assault;
     [SerializeField] GameObject pistol;
     [SerializeField] GameObject shotgun;
-    [SerializeField] GameObject wheelOfFortune;
+    
     Gun pistolScript;
     Gun assaultScript;
     Gun shotgunScript;
@@ -31,12 +32,14 @@ public class GameManager : MonoBehaviour
     bool bombSpawn = false;
     float upgradeSpawnTime;
     bool upgradeSpawn = false;
+    bool wheelSpawn = true;
     public TextMeshProUGUI scoreDisplay;
     private void Start()
     {
         StartCoroutine("bombSpawnCd");
         StartCoroutine("upgradeSpawnCd");
         StartCoroutine("barrelSpawnCd");
+        StartCoroutine("wheelSpawnCd");
         pistolScript = pistol.GetComponent<Gun>();
         assaultScript = assault.GetComponent<Gun>();
         shotgunScript = shotgun.GetComponent<Gun>();
@@ -81,6 +84,12 @@ public class GameManager : MonoBehaviour
             barrelSpawn = false;
             StartCoroutine("barrelSpawnCd");
         }
+        if (wheelSpawn)
+        {
+            Instantiate(wheelPrefab, new Vector3(0.85f, 7.54f, -1.75f), Quaternion.Euler(0, 0, 0));
+            wheelSpawn = false;
+            StartCoroutine("wheelSpawnCd");
+        }
         scoreDisplay.SetText(score.ToString());
 
     }
@@ -112,8 +121,8 @@ public class GameManager : MonoBehaviour
 
     public void StopSpin()
     {
-        wheelOfFortune.GetComponent<Spin>().rotation = false;
-        wheelOfFortune.transform.Rotate(0, 0, 0);
+        wheelPrefab.GetComponent<Spin>().rotation = false;
+        //wheelPrefab.transform.Rotate(0, 0, 0);
     }
 
     IEnumerator spawnCd()
@@ -146,6 +155,11 @@ public class GameManager : MonoBehaviour
         barrelSpawnTime = Random.Range(10, 15);
         yield return new WaitForSeconds(barrelSpawnTime);
         barrelSpawn = true;
+    }
+    IEnumerator wheelSpawnCd()
+    {
+        yield return new WaitForSeconds(10);
+        wheelSpawn = true; 
     }
     IEnumerator FrenzyTimer()
     {
