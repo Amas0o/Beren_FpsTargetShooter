@@ -10,6 +10,7 @@ TagManager:
   - Bomb
   - Upgrade
   - WheelOfFortune
+  - Barrel
   layers:
   - Default
   - TransparentFX

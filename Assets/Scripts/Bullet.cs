@@ -34,6 +34,12 @@ public class Bullet : MonoBehaviour
             script.AddDamage(10);
 
         }
+        if (collision.gameObject.tag == "Barrel")
+        {
+            var script = collision.gameObject.GetComponent<Barrel>();
+            script.AddDamage(10);
+
+        }
         if ((collision.gameObject.tag == "Bullet") || (collision.gameObject.tag == "Pellet") )
         {
             return;

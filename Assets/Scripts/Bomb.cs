@@ -6,14 +6,12 @@ public class Bomb : MonoBehaviour
 {
     [SerializeField] float health;
     [SerializeField] float deathTime;
-    [SerializeField] ParticleSystem explosion;
     private int prospectiveScore;
     // Start is called before the first frame update
     void Start()
     {
         prospectiveScore = -100;
         StartCoroutine("Death");
-        explosion.transform.position = gameObject.transform.position;
     }
 
     // Update is called once per frame
@@ -24,11 +22,9 @@ public class Bomb : MonoBehaviour
         if (health <= 0)
         {   
             
-            explosion.Play();
             Debug.Log("Bomb Exploded");
             GameManager.instance.AddToScore(prospectiveScore);
-            StartCoroutine("ExplosionDelay");
-            gameObject.GetComponent<Collider>().enabled = false;  
+            Destroy(gameObject);
         }
     }
     IEnumerator Death()
@@ -37,9 +33,5 @@ public class Bomb : MonoBehaviour
         Destroy(gameObject);
     }
 
-    IEnumerator ExplosionDelay()
-    {
-        yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
-    }
+    
 }
