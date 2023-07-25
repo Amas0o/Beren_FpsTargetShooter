@@ -10,7 +10,7 @@ public class WheelSpin : MonoBehaviour
     [SerializeField] float brakeSpeed;
     private void Start()
     {
-        // StartCoroutine("Death");
+        StartCoroutine("Death");
         rotation = true;
     }
 
