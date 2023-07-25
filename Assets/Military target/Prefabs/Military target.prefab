@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23415105773652922}
   - component: {fileID: 7817095048378094610}
   - component: {fileID: 268393553624912135}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Military target
   m_TagString: Target
   m_Icon: {fileID: 0}

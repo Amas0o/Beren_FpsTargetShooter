@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1925817343914810180}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 8427483238082181658}
   - component: {fileID: 7489063145950780535}
   - component: {fileID: 8432068678815690713}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: spark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4884,7 +4884,7 @@ GameObject:
   - component: {fileID: 8532233763281190612}
   - component: {fileID: 4963583937170652542}
   - component: {fileID: 6455143437538876857}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: spark3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10011,7 +10011,7 @@ GameObject:
   - component: {fileID: 4666555345638723942}
   - component: {fileID: 5102442173511023595}
   - component: {fileID: 2339341123954066194}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: sparkle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14848,7 +14848,7 @@ GameObject:
   - component: {fileID: 5830794085472444084}
   - component: {fileID: 2536273933241331671}
   - component: {fileID: 4391921649884582714}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bomb
   m_TagString: Bomb
   m_Icon: {fileID: 0}
@@ -14907,7 +14907,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   deathTime: 4
-  explosion: {fileID: 9185630215131740836}
 --- !u!1 &2706622165558107270
 GameObject:
   m_ObjectHideFlags: 0
@@ -14919,7 +14918,7 @@ GameObject:
   - component: {fileID: 2025191433478317519}
   - component: {fileID: 2423811695331937659}
   - component: {fileID: 6126056170327004435}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: spark2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20052,6 +20051,10 @@ PrefabInstance:
       value: Explosion
       objectReference: {fileID: 0}
     - target: {fileID: 6983846916760460814, guid: 09730d00422438148861d381e4b6c35d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6983846916760460814, guid: 09730d00422438148861d381e4b6c35d, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -20125,11 +20128,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8338289251735949172, guid: 09730d00422438148861d381e4b6c35d, type: 3}
   m_PrefabInstance: {fileID: 4883911929541476947}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &9185630215131740836 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4377162409821436151, guid: 09730d00422438148861d381e4b6c35d, type: 3}
-  m_PrefabInstance: {fileID: 4883911929541476947}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8200621812606323846
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20185,6 +20183,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ffdfad76d2f7648d19c79be026141ab7, type: 3}
       propertyPath: m_Name
       value: bomb
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ffdfad76d2f7648d19c79be026141ab7, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

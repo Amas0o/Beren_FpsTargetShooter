@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1670658912884559557}
   - component: {fileID: 6887552124049536191}
   - component: {fileID: 3526230668303971746}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 200
   m_TagString: WheelOfFortune
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 3197933881971983321}
   - component: {fileID: 8942962114067360588}
   - component: {fileID: 5001361319997393745}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 300
   m_TagString: WheelOfFortune
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 3462615028946480719}
   - component: {fileID: 6118470600943483504}
   - component: {fileID: 7361157834269357081}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 400
   m_TagString: WheelOfFortune
   m_Icon: {fileID: 0}
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 6639292233192993745}
   - component: {fileID: 2250552184897143453}
   - component: {fileID: 585446575411763998}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 200
   m_TagString: WheelOfFortune
   m_Icon: {fileID: 0}
@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 8322790095106920780}
   - component: {fileID: 7200544735069481852}
   - component: {fileID: 782953901055165782}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 400
   m_TagString: WheelOfFortune
   m_Icon: {fileID: 0}
@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 8826425086433704824}
   - component: {fileID: 4227582046172810866}
   - component: {fileID: 969701616878430228}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WheelOfFortune
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,7 +513,7 @@ Transform:
   - {fileID: 1670658912884559557}
   - {fileID: 8356609993960704122}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4227582046172810866
 SpriteRenderer:
@@ -592,7 +592,7 @@ GameObject:
   - component: {fileID: 8356609993960704122}
   - component: {fileID: 6389973985901931463}
   - component: {fileID: 8687438253719343943}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 300
   m_TagString: WheelOfFortune
   m_Icon: {fileID: 0}
@@ -687,7 +687,7 @@ GameObject:
   - component: {fileID: 8120008042884494685}
   - component: {fileID: 5752334867227626741}
   - component: {fileID: 3774037939486154306}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 500
   m_TagString: WheelOfFortune
   m_Icon: {fileID: 0}

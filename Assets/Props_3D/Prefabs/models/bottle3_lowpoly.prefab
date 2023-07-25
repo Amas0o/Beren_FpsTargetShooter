@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7534809905175434549}
   - component: {fileID: 2344834088234355619}
   - component: {fileID: 1041495390827658489}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bottle3_lowpoly
   m_TagString: Upgrade
   m_Icon: {fileID: 0}
@@ -176,6 +176,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 33b99d37c7d1547698fc724fdd2a4b9e, type: 3}
       propertyPath: m_Name
       value: bottle3_lowpoly_liquid
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 33b99d37c7d1547698fc724fdd2a4b9e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
