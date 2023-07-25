@@ -27,12 +27,19 @@ public class Bomb : MonoBehaviour
             explosion.Play();
             Debug.Log("Bomb Exploded");
             GameManager.instance.AddToScore(prospectiveScore);
-            Destroy(gameObject);
+            StartCoroutine("ExplosionDelay");
+            gameObject.GetComponent<Collider>().enabled = false;  
         }
     }
     IEnumerator Death()
     {
         yield return new WaitForSeconds(deathTime);
-       Destroy(gameObject);
+        Destroy(gameObject);
+    }
+
+    IEnumerator ExplosionDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
     }
 }
