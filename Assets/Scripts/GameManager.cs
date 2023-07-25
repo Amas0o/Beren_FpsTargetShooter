@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject targetPrefab;
     [SerializeField] GameObject bombPrefab;
     [SerializeField] GameObject upgradePrefab;
+    [SerializeField] GameObject barrelPrefab;
     [SerializeField] GameObject assault;
     [SerializeField] GameObject pistol;
     [SerializeField] GameObject shotgun;
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
     float y = 0;
     bool targetSpawn = true;
     float targetSpawnTime;
+    bool barrelSpawn = false;
+    float barrelSpawnTime;
     float bombSpawnTime;
     bool bombSpawn = false;
     float upgradeSpawnTime;
@@ -33,7 +36,7 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine("bombSpawnCd");
         StartCoroutine("upgradeSpawnCd");
-
+        StartCoroutine("barrelSpawnCd");
         pistolScript = pistol.GetComponent<Gun>();
         assaultScript = assault.GetComponent<Gun>();
         shotgunScript = shotgun.GetComponent<Gun>();
@@ -68,6 +71,15 @@ public class GameManager : MonoBehaviour
             Instantiate(upgradePrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
             upgradeSpawn = false;
             StartCoroutine("upgradeSpawnCd");
+        }
+        if (barrelSpawn)
+        {
+            x = Random.Range(-3.85f, 4.85f);
+            z = Random.Range(-6f, 6f);
+            y = Random.Range(0f, 1.7f);
+            Instantiate(barrelPrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+            barrelSpawn = false;
+            StartCoroutine("barrelSpawnCd");
         }
         scoreDisplay.SetText(score.ToString());
 
@@ -126,6 +138,14 @@ public class GameManager : MonoBehaviour
         upgradeSpawnTime = Random.Range(10, 15);
         yield return new WaitForSeconds(upgradeSpawnTime);
         upgradeSpawn = true;
+    }
+
+    IEnumerator barrelSpawnCd()
+    {
+        //Debug.Log("me is work");
+        barrelSpawnTime = Random.Range(10, 15);
+        yield return new WaitForSeconds(barrelSpawnTime);
+        barrelSpawn = true;
     }
     IEnumerator FrenzyTimer()
     {
