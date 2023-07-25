@@ -12,7 +12,7 @@ public class Spin : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine("Death");
+       // StartCoroutine("Death");
     }
 
     // Update is called once per frame
@@ -24,10 +24,9 @@ public class Spin : MonoBehaviour
         }
         else
         {
-            speed -= 0.025f; 
-            if (speed > 0)
-                transform.Rotate(Vector3.forward, speed);
-            else Destroy(gameObject);
+            speed -= 0.025f;
+            if (speed > 0) transform.Rotate(Vector3.forward, speed);
+            else StartCoroutine("DeathAfterCollision");
         }
     }
 
@@ -36,4 +35,10 @@ public class Spin : MonoBehaviour
         yield return new WaitForSeconds(deathTime);
         Destroy(gameObject);
     }
+    IEnumerator DeathAfterCollision()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
+    }
+
 }

@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
     public void StopSpin()
     {
         wheelPrefab.GetComponent<Spin>().rotation = false;
-        //wheelPrefab.transform.Rotate(0, 0, 0);
+       // wheelPrefab.transform.Rotate(0, 0, 0);
     }
 
     IEnumerator spawnCd()
@@ -158,7 +158,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator wheelSpawnCd()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(20f);
         wheelSpawn = true; 
     }
     IEnumerator FrenzyTimer()
