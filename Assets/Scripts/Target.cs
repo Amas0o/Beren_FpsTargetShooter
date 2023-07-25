@@ -10,7 +10,7 @@ public class Target : MonoBehaviour
     private void Start()
     {
         prospectiveScore = 100;
-        StartCoroutine("Death");
+        //StartCoroutine("Death");
     }
     void Update()
     {
