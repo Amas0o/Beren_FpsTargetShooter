@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject assault;
     [SerializeField] GameObject pistol;
     [SerializeField] GameObject shotgun;
+    [SerializeField] GameObject wheelOfFortune;
     Gun pistolScript;
     Gun assaultScript;
     Gun shotgunScript;
@@ -95,6 +96,12 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine("FrenzyTimer");
         Debug.Log("Frenzy enabled");
+    }
+
+    public void StopSpin()
+    {
+        wheelOfFortune.GetComponent<Spin>().rotation = false;
+        wheelOfFortune.transform.Rotate(0, 0, 0);
     }
 
     IEnumerator spawnCd()

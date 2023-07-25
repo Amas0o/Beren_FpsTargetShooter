@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6887552124049536191}
   - component: {fileID: 3526230668303971746}
   m_Layer: 0
-  m_Name: Collider1 (5)
+  m_Name: 200
   m_TagString: WheelOfFortune
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 8942962114067360588}
   - component: {fileID: 5001361319997393745}
   m_Layer: 0
-  m_Name: Collider1 (3)
+  m_Name: 300
   m_TagString: WheelOfFortune
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 6118470600943483504}
   - component: {fileID: 7361157834269357081}
   m_Layer: 0
-  m_Name: Collider1 (4)
+  m_Name: 400
   m_TagString: WheelOfFortune
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 2250552184897143453}
   - component: {fileID: 585446575411763998}
   m_Layer: 0
-  m_Name: Collider1 (2)
+  m_Name: 200
   m_TagString: WheelOfFortune
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 7200544735069481852}
   - component: {fileID: 782953901055165782}
   m_Layer: 0
-  m_Name: Collider1 (1)
+  m_Name: 400
   m_TagString: WheelOfFortune
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -485,6 +485,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8826425086433704824}
   - component: {fileID: 4227582046172810866}
+  - component: {fileID: 969701616878430228}
   m_Layer: 0
   m_Name: WheelOfFortune
   m_TagString: Untagged
@@ -566,6 +567,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &969701616878430228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431618986216430347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a5f3726e09b3234ea7ebdecfcb5e8e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  rotation: 1
 --- !u!1 &6991696918464831380
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,7 +593,7 @@ GameObject:
   - component: {fileID: 6389973985901931463}
   - component: {fileID: 8687438253719343943}
   m_Layer: 0
-  m_Name: Collider1 (6)
+  m_Name: 300
   m_TagString: WheelOfFortune
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -673,7 +688,7 @@ GameObject:
   - component: {fileID: 5752334867227626741}
   - component: {fileID: 3774037939486154306}
   m_Layer: 0
-  m_Name: Collider1
+  m_Name: 500
   m_TagString: WheelOfFortune
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
