@@ -13,6 +13,9 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        
+        Debug.Log(collision.gameObject.name);
+        
         if(collision.gameObject.tag == "Target" )
         {
             var script = collision.gameObject.GetComponent<Target>();
@@ -38,7 +41,10 @@ public class Bullet : MonoBehaviour
         //Debug.Log("Collided with" + collision.gameObject.name);
         Destroy(gameObject);    
     }
-
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.gameObject.name);
+    }
     IEnumerator Death()
     {
         yield return new WaitForSeconds(deathTime);
