@@ -19,7 +19,7 @@ public class Target : MonoBehaviour
         {
             Debug.Log("error");
         }
-        //StartCoroutine("Death");
+        StartCoroutine("Death");
     }
     private void Start()
     {
