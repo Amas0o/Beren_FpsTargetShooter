@@ -7,6 +7,7 @@ public class Gun : MonoBehaviour
 {
     //bullet 
     [SerializeField] GameObject bullet;
+    
 
     //bullet force
     [SerializeField] float shootForce, upwardForce;
@@ -28,6 +29,11 @@ public class Gun : MonoBehaviour
     //Reference
     [SerializeField] Camera fpsCam;
     [SerializeField] Transform attackPoint;
+    [SerializeField] GameObject bulletPoint;
+    [SerializeField] GameObject laserPoint;
+    [SerializeField] GameObject laser;
+    bool laserActive = false;
+    [SerializeField] GameObject crosshair;
 
     //Graphics
     //public GameObject muzzleFlash;
@@ -50,9 +56,28 @@ public class Gun : MonoBehaviour
     private void Start()
     {
         shootingSound = GetComponent<AudioSource>();
+        //laser = attackPoint.GetComponent<LineRenderer>();
+        laser.SetActive(false);
+ 
+
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !laserActive)
+        {
+            attackPoint.position = laserPoint.transform.position;
+            laserActive = true;
+            laser.SetActive(true);
+            crosshair.SetActive(false);
+        }
+        else if (Input.GetKeyDown(KeyCode.Mouse1) && laserActive)
+        {
+            attackPoint.position = bulletPoint.transform.position;
+            laserActive = false;
+            laser.SetActive(false);
+            crosshair.SetActive(true);
+        }
+
         MyInput();
 
         //Set ammo display, if it exists :D
