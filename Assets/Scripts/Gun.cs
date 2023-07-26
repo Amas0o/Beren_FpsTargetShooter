@@ -189,4 +189,12 @@ public class Gun : MonoBehaviour
     {
         timeBetweenShooting *= 2;
     }
+
+    public void TurnLaserOff()
+    {
+        attackPoint.position = bulletPoint.transform.position;
+        laserActive = false;
+        laser.SetActive(false);
+        crosshair.SetActive(true);
+    }
 }

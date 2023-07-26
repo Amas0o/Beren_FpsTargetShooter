@@ -30,11 +30,13 @@ public class WeaponSwitching : MonoBehaviour
 
         if (previousSelectedWeapon != selectedWeapon)
         {
-            SelectWeapon();
             if (!crosshair.activeSelf)
             {
                 crosshair.SetActive(true);
+                transform.GetChild(previousSelectedWeapon).GetComponent<Gun>().TurnLaserOff();
             }
+            SelectWeapon();
+            
         }
 
     }
