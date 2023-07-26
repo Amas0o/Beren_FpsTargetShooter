@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponSwitching : MonoBehaviour
 {
     int selectedWeapon = 0;
+    [SerializeField] GameObject crosshair;
     void Start()
     {
         SelectWeapon();
@@ -30,6 +31,10 @@ public class WeaponSwitching : MonoBehaviour
         if (previousSelectedWeapon != selectedWeapon)
         {
             SelectWeapon();
+            if (!crosshair.activeSelf)
+            {
+                crosshair.SetActive(true);
+            }
         }
 
     }
