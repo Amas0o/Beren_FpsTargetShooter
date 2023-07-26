@@ -9,15 +9,30 @@ public class Barrel : MonoBehaviour
     [SerializeField] float deathTime;
     [SerializeField] ParticleSystem explosion;
     [SerializeField] float radius;
+    [SerializeField] float damage;
+    HealthBarController healthBar;
+    float maxHealth;
     AudioSource explosionSound;
     Target targetScript;
     Bomb bombScript;
     Upgrade upgradeScript;
     Barrel barrelScript;
     Collider[] colliders;
+
+    private void Awake()
+    {
+        maxHealth = health;
+        healthBar = GetComponentInChildren<HealthBarController>();
+        if (healthBar == null)
+        {
+            Debug.Log("error");
+        }
+        StartCoroutine("Death");
+    }
     private void Start()
     {
         //StartCoroutine("Death");
+        healthBar.UpdateHealth(health, maxHealth);
         explosion.transform.position = gameObject.transform.position;
         explosionSound = gameObject.GetComponent<AudioSource>();
 
@@ -34,6 +49,7 @@ public class Barrel : MonoBehaviour
     {
         //Debug.Log("Took damage" +  damage); 
         health -= damage;
+        healthBar.UpdateHealth(health, maxHealth);
         if (health <= 0)
         {
             //Debug.Log("Dead " + name);
@@ -76,7 +92,7 @@ public class Barrel : MonoBehaviour
                 targetScript = colliders[i].gameObject.GetComponent<Target>();
                 if(targetScript != null)
                 {
-                    targetScript.AddDamage(50f);
+                    targetScript.AddDamage(damage);
                 }
                 else
                 {
@@ -90,7 +106,7 @@ public class Barrel : MonoBehaviour
                 bombScript = colliders[i].gameObject.GetComponent<Bomb>();
                 if (bombScript != null)
                 {
-                    bombScript.AddDamage(40f);
+                    bombScript.AddDamage(damage);
                 }
                 else
                 {
@@ -103,7 +119,7 @@ public class Barrel : MonoBehaviour
                 upgradeScript = colliders[i].gameObject.GetComponent<Upgrade>();
                 if (upgradeScript != null)
                 {
-                    upgradeScript.AddDamage(40f);
+                    upgradeScript.AddDamage(damage);
                 }
                 else
                 {
@@ -116,7 +132,7 @@ public class Barrel : MonoBehaviour
                 barrelScript = colliders[i].gameObject.GetComponent<Barrel>();
                 if (barrelScript != null)
                 {
-                    barrelScript.AddDamage(40f);
+                    barrelScript.AddDamage(damage);
                 }
                 else
                 {
