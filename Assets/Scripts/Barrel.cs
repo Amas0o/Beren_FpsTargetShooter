@@ -9,6 +9,7 @@ public class Barrel : MonoBehaviour
     [SerializeField] float deathTime;
     [SerializeField] ParticleSystem explosion;
     [SerializeField] float radius;
+    AudioSource explosionSound;
     Target targetScript;
     Bomb bombScript;
     Upgrade upgradeScript;
@@ -18,6 +19,8 @@ public class Barrel : MonoBehaviour
     {
         //StartCoroutine("Death");
         explosion.transform.position = gameObject.transform.position;
+        explosionSound = gameObject.GetComponent<AudioSource>();
+
     }
     void Update()
     {
@@ -39,6 +42,7 @@ public class Barrel : MonoBehaviour
             gameObject.GetComponent<Collider>().enabled = false;
             Explode();
             explosion.Play();
+            explosionSound.Play();
             StartCoroutine("ExplosionDelay");
             
         }
@@ -52,7 +56,7 @@ public class Barrel : MonoBehaviour
 
     IEnumerator ExplosionDelay()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.9f);
         Destroy(gameObject);
     }
     public void Explode()
