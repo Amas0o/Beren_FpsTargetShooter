@@ -9,27 +9,33 @@ public class Target : MonoBehaviour
     private int prospectiveScore;
     [SerializeField] float deathTime;
     HealthBarController healthBar;
+    HealthBarController timeBar;
     float maxHealth;
+    float elaspedTime;
     private void Awake()
     {
         prospectiveScore = 100;
         maxHealth = health;
         healthBar = GetComponentInChildren<HealthBarController>();
-        if(healthBar == null)
+        timeBar = GetComponentsInChildren<HealthBarController>()[1];
+        if (healthBar == null)
         {
             Debug.Log("error");
         }
-        StartCoroutine("Death");
+        elaspedTime = 0;
+        //StartCoroutine("Death");
     }
     private void Start()
     {
         healthBar.UpdateHealth(health, maxHealth);
     }
-    void Update()
+    public void UpdateInstance()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        elaspedTime+= Time.deltaTime;
+        timeBar.UpdateHealth(deathTime-elaspedTime, deathTime);
+        if(elaspedTime >= deathTime)
         {
-            AddDamage(10f);
+            Destroy(gameObject);
         }
     }
 

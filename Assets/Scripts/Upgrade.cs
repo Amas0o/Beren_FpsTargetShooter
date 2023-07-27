@@ -7,17 +7,31 @@ public class Upgrade : MonoBehaviour
     [SerializeField] float health;
     [SerializeField] float deathTime;
     HealthBarController healthBar;
+    HealthBarController timeBar;
+    float elaspedTime;
     float maxHealth;
     // Update is called once per frame
     private void Awake()
     {
         maxHealth = health;
         healthBar = GetComponentInChildren<HealthBarController>();
+        timeBar = GetComponentsInChildren<HealthBarController>()[1];
         if (healthBar == null)
         {
             Debug.Log("error");
         }
-        StartCoroutine("Death");
+        elaspedTime = 0;
+        //StartCoroutine("Death");
+    }
+
+    public void UpdateInstance()
+    {
+        elaspedTime += Time.deltaTime;
+        timeBar.UpdateHealth(deathTime - elaspedTime, deathTime);
+        if (elaspedTime >= deathTime)
+        {
+            Destroy(gameObject);
+        }
     }
     private void Start()
     {

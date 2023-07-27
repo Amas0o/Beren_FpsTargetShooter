@@ -8,15 +8,25 @@ public class WheelSpin : MonoBehaviour
     bool rotation;
     [SerializeField] float deathTime;
     [SerializeField] float brakeSpeed;
+    //HealthBarController timeBar;
+    float elaspedTime;
     private void Start()
     {
-        StartCoroutine("Death");
+        //StartCoroutine("Death");
+        //timeBar = GetComponentInChildren<HealthBarController>();
         rotation = true;
+        elaspedTime = 0;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    public void UpdateInstance()
     {
+        elaspedTime += Time.deltaTime;
+        //timeBar.UpdateHealth(deathTime - elaspedTime, deathTime);
+        if (elaspedTime >= deathTime)
+        {
+            Destroy(gameObject);
+        }
         if (rotation)
         {
             //Debug.Log("rotation in update is " + rotation);
