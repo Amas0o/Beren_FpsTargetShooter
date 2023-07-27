@@ -10,6 +10,8 @@ public class Upgrade : MonoBehaviour
     HealthBarController timeBar;
     float elaspedTime;
     float maxHealth;
+    [SerializeField] GameObject upgradeCollect;
+    GameObject temp;
     // Update is called once per frame
     private void Awake()
     {
@@ -46,6 +48,7 @@ public class Upgrade : MonoBehaviour
         {
             //Debug.Log("Dead " + name);
             GameManager.instance.Frenzy();
+            temp = Instantiate(upgradeCollect, gameObject.transform.position, gameObject.transform.rotation);
             Destroy(gameObject);
         }
     }

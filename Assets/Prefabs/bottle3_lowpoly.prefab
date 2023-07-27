@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   deathTime: 4
+  upgradeCollect: {fileID: 4885958472084325238, guid: c362ac09b1d92a04e86bf7da5194d8d5, type: 3}
 --- !u!1001 &122585137209451399
 PrefabInstance:
   m_ObjectHideFlags: 0
