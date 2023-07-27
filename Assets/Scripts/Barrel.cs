@@ -10,6 +10,9 @@ public class Barrel : MonoBehaviour
     [SerializeField] ParticleSystem explosion;
     [SerializeField] float radius;
     [SerializeField] float damage;
+    [SerializeField] int prospectiveScore;
+    [SerializeField] GameObject scoreVisual;
+    GameObject temp;
     float elaspedTime;
     HealthBarController healthBar;
     HealthBarController timeBar;
@@ -59,11 +62,14 @@ public class Barrel : MonoBehaviour
         {
             //Debug.Log("Dead " + name);
             //GameManager.instance.AddToScore(prospectiveScore);
-            Debug.Log("Meow");
+           
             gameObject.GetComponent<Collider>().enabled = false;
             Explode();
             explosion.Play();
             explosionSound.Play();
+            GameManager.instance.AddToScore(prospectiveScore);
+            temp = Instantiate(scoreVisual, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 3, gameObject.transform.position.z), gameObject.transform.rotation);
+            temp.GetComponent<ScoreLerp>().setText(prospectiveScore);
             StartCoroutine("ExplosionDelay");
             
         }

@@ -129,6 +129,8 @@ MonoBehaviour:
   explosion: {fileID: 6745209161796073362}
   radius: 4
   damage: 50
+  prospectiveScore: 200
+  scoreVisual: {fileID: 3042264280243945401, guid: 224bd4b3ad270ab45a5824fd4e188aa0, type: 3}
 --- !u!82 &3507742362723305619
 AudioSource:
   m_ObjectHideFlags: 0

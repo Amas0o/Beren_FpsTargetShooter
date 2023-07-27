@@ -11,6 +11,8 @@ public class Bomb : MonoBehaviour
     HealthBarController timeBar;
     float elaspedTime;
     float maxHealth;
+    [SerializeField] GameObject scoreVisual;
+    GameObject temp;
     // Start is called before the first frame update
 
     private void Awake()
@@ -51,6 +53,8 @@ public class Bomb : MonoBehaviour
             
             Debug.Log("Bomb Exploded");
             GameManager.instance.AddToScore(prospectiveScore);
+            temp = Instantiate(scoreVisual, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 3, gameObject.transform.position.z), gameObject.transform.rotation);
+            temp.GetComponent<ScoreLerp>().setText(prospectiveScore);
             Destroy(gameObject);
         }
     }

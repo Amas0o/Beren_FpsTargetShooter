@@ -38,6 +38,11 @@ public class ScoreLerp : MonoBehaviour
     }
     public void setText(int score) 
     {
-        text.SetText("+" + score.ToString());
+        if (score < 0)
+        {
+            text.SetText(score.ToString());
+            text.color = Color.red;
+        }
+        else text.SetText("+" + score.ToString());
     }
 }

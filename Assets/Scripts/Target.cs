@@ -12,6 +12,8 @@ public class Target : MonoBehaviour
     HealthBarController timeBar;
     float maxHealth;
     float elaspedTime;
+    [SerializeField] GameObject scoreVisual;
+    GameObject temp;
     private void Awake()
     {
         prospectiveScore = 100;
@@ -48,6 +50,8 @@ public class Target : MonoBehaviour
         {
             //Debug.Log("Dead " + name);
             GameManager.instance.AddToScore(prospectiveScore);
+            temp = Instantiate(scoreVisual, new Vector3(gameObject.transform.position.x  ,gameObject.transform.position.y + 3 , gameObject.transform.position.z), Quaternion.identity);
+            temp.GetComponent<ScoreLerp>().setText(prospectiveScore);
             Destroy(gameObject);
         }
     }
