@@ -10,7 +10,9 @@ public class Barrel : MonoBehaviour
     [SerializeField] ParticleSystem explosion;
     [SerializeField] float radius;
     [SerializeField] float damage;
+    float elaspedTime;
     HealthBarController healthBar;
+    HealthBarController timeBar;
     float maxHealth;
     AudioSource explosionSound;
     Target targetScript;
@@ -23,11 +25,12 @@ public class Barrel : MonoBehaviour
     {
         maxHealth = health;
         healthBar = GetComponentInChildren<HealthBarController>();
+        timeBar = GetComponentsInChildren<HealthBarController>()[1];
         if (healthBar == null)
         {
             Debug.Log("error");
         }
-        StartCoroutine("Death");
+        //StartCoroutine("Death");
     }
     private void Start()
     {
@@ -35,13 +38,15 @@ public class Barrel : MonoBehaviour
         healthBar.UpdateHealth(health, maxHealth);
         explosion.transform.position = gameObject.transform.position;
         explosionSound = gameObject.GetComponent<AudioSource>();
-
+        elaspedTime = 0;
     }
-    void Update()
+    public void UpdateInstance()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        elaspedTime += Time.deltaTime;
+        timeBar.UpdateHealth(deathTime - elaspedTime, deathTime);
+        if (elaspedTime >= deathTime)
         {
-            AddDamage(10f);
+            Destroy(gameObject);
         }
     }
 

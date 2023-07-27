@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject assault;
     [SerializeField] GameObject pistol;
     [SerializeField] GameObject shotgun;
-    
+    List<GameObject> instanceList;
     Gun pistolScript;
     Gun assaultScript;
     Gun shotgunScript;
@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     bool upgradeSpawn = false;
     bool wheelSpawn = true;
     public TextMeshProUGUI scoreDisplay;
+    GameObject prefabInstance;
     private void Start()
     {
         StartCoroutine("bombSpawnCd");
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
         pistolScript = pistol.GetComponent<Gun>();
         assaultScript = assault.GetComponent<Gun>();
         shotgunScript = shotgun.GetComponent<Gun>();
-
+        instanceList = new List<GameObject>();
         
     }
     private void Update()
@@ -53,7 +54,8 @@ public class GameManager : MonoBehaviour
             x = Random.Range(-3.85f, 4.85f);
             z = Random.Range(-6f, 18f);
             y = Random.Range(-0.6f, 0.6f);
-            Instantiate(targetPrefab, new Vector3(x, y, z), Quaternion.Euler(90, 0, 0));
+            prefabInstance = Instantiate(targetPrefab, new Vector3(x, y, z), Quaternion.Euler(90, 0, 0));
+            instanceList.Add(prefabInstance);
             targetSpawn = false;
             StartCoroutine("spawnCd");
         }
@@ -62,7 +64,8 @@ public class GameManager : MonoBehaviour
             x = Random.Range(-3.85f, 4.85f);
             z = Random.Range(-6f, 6f);
             y = Random.Range(0f, 1.7f);
-            Instantiate(bombPrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+            prefabInstance = Instantiate(bombPrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+            instanceList.Add(prefabInstance);
             bombSpawn = false;
             StartCoroutine("bombSpawnCd");
         }
@@ -71,7 +74,8 @@ public class GameManager : MonoBehaviour
             x = Random.Range(-3.85f, 4.85f);
             z = Random.Range(-6f, 6f);
             y = Random.Range(0f, 1.7f);
-            Instantiate(upgradePrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+            prefabInstance = Instantiate(upgradePrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+            instanceList.Add(prefabInstance);
             upgradeSpawn = false;
             StartCoroutine("upgradeSpawnCd");
         }
@@ -80,17 +84,49 @@ public class GameManager : MonoBehaviour
             x = Random.Range(-3.85f, 4.85f);
             z = Random.Range(-6f, 6f);
             y = Random.Range(0f, 1.7f);
-            Instantiate(barrelPrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+            prefabInstance = Instantiate(barrelPrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+            instanceList.Add(prefabInstance);
             barrelSpawn = false;
             StartCoroutine("barrelSpawnCd");
         }
         if (wheelSpawn)
         {
-            Instantiate(wheelPrefab, new Vector3(0.85f, 7.54f, -1.75f), Quaternion.Euler(0, 0, 0));
+            prefabInstance = Instantiate(wheelPrefab, new Vector3(0.85f, 7.54f, -1.75f), Quaternion.Euler(0, 0, 0));
+            instanceList.Add(prefabInstance);
             wheelSpawn = false;
             StartCoroutine("wheelSpawnCd");
         }
         scoreDisplay.SetText(score.ToString());
+        instanceList.RemoveAll(IsNull);
+        //Debug.Log("List size is " + instanceList.Count);
+        foreach (GameObject item in instanceList)
+        {
+            if (item.tag == "Target")
+            {
+                item.gameObject.GetComponent<Target>().UpdateInstance();
+
+            }
+            if (item.tag == "Bomb")
+            {
+                item.GetComponent<Bomb>().UpdateInstance();
+          
+            }
+            if (item.tag == "Upgrade")
+            {
+                item.GetComponent<Upgrade>().UpdateInstance();
+
+            }
+            if (item.tag == "Barrel")
+            {
+                item.GetComponent<Barrel>().UpdateInstance();
+
+            }
+            if (item.tag == "WheelOfFortune")
+            {
+                item.GetComponent<WheelSpin>().UpdateInstance();
+
+            }
+        }
 
     }
     private void Awake()
@@ -164,5 +200,17 @@ public class GameManager : MonoBehaviour
         pistolScript.DisableFrenzy();
         assaultScript.DisableFrenzy();
         shotgunScript.DisableFrenzy();
+    }
+
+    bool IsNull(GameObject test)
+    {
+        if(test == null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

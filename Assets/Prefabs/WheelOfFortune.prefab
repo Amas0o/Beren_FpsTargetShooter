@@ -492,7 +492,7 @@ GameObject:
   - component: {fileID: 8434053195470092195}
   m_Layer: 3
   m_Name: WheelOfFortune
-  m_TagString: Untagged
+  m_TagString: WheelOfFortune
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
