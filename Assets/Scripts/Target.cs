@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,7 +10,9 @@ public class Target : MonoBehaviour
     private int prospectiveScore;
     [SerializeField] float deathTime;
     HealthBarController healthBar;
+    [SerializeField] GameObject scoreLerp;
     float maxHealth;
+    GameObject temp;
     private void Awake()
     {
         prospectiveScore = 100;
@@ -42,6 +45,8 @@ public class Target : MonoBehaviour
         {
             //Debug.Log("Dead " + name);
             GameManager.instance.AddToScore(prospectiveScore);
+            temp =  Instantiate(scoreLerp, gameObject.transform.position, gameObject.transform.rotation);
+            temp.GetComponent<ScoreLerp>().setText(prospectiveScore);
             Destroy(gameObject);
         }
     }
