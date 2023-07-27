@@ -29,6 +29,7 @@ public class WheelSpin : MonoBehaviour
             else
             {
                 //Debug.Log("no more ghoomrha" + speed);
+                //Instantiate upgrade
                 Destroy(gameObject);
             }
         }
