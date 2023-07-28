@@ -10,6 +10,7 @@ public class WheelSpin : MonoBehaviour
     [SerializeField] float deathTime;
     [SerializeField] float brakeSpeed;
     [SerializeField] GameObject WheelOfFortuneCollect;
+    bool isNegative = false;
     int prospectiveScore;
     //HealthBarController timeBar;
     float elaspedTime;
@@ -34,7 +35,8 @@ public class WheelSpin : MonoBehaviour
         if (rotation)
         {
             //Debug.Log("rotation in update is " + rotation);
-            transform.Rotate(Vector3.forward, speed * Time.deltaTime);
+            if (isNegative) transform.Rotate(Vector3.back, speed * Time.deltaTime);
+            else transform.Rotate(Vector3.forward, speed * Time.deltaTime);
         }
         else
         {
@@ -75,4 +77,9 @@ public class WheelSpin : MonoBehaviour
     {
         prospectiveScore = score;
     }
+    public void SetisNegative()
+    {
+        isNegative = true;
+    }
+
 }
