@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.VisualScripting.Metadata;
 
 public class WheelSpin : MonoBehaviour
 {
@@ -8,8 +9,11 @@ public class WheelSpin : MonoBehaviour
     bool rotation;
     [SerializeField] float deathTime;
     [SerializeField] float brakeSpeed;
+    [SerializeField] GameObject WheelOfFortuneCollect;
+    int prospectiveScore;
     //HealthBarController timeBar;
     float elaspedTime;
+    GameObject temp;
     private void Start()
     {
         //StartCoroutine("Death");
@@ -40,6 +44,8 @@ public class WheelSpin : MonoBehaviour
             {
                 //Debug.Log("no more ghoomrha" + speed);
                 //Instantiate upgrade
+                temp = Instantiate(WheelOfFortuneCollect, gameObject.transform.position, gameObject.transform.rotation);
+                temp.GetComponent<bonusLerp>().SetBonus(prospectiveScore);
                 Destroy(gameObject);
             }
         }
@@ -55,5 +61,18 @@ public class WheelSpin : MonoBehaviour
     public void StopRotation()
     {
         rotation = false;
+    }
+
+    public void Disable()
+    {
+        foreach (Transform t in transform)
+        {
+            Destroy(t.gameObject); 
+        }
+        
+    }
+    public void SetScore(int score)
+    {
+        prospectiveScore = score;
     }
 }

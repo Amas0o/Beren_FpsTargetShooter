@@ -19,7 +19,7 @@ public class Wheel : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log("rotation in update is " + rotation);
+        //Debug.Log("rotation in update is " + rotation);
         transform.Rotate(Vector3.forward, speed*Time.deltaTime);  
     }
 
@@ -31,7 +31,7 @@ public class Wheel : MonoBehaviour
     
     public void StopRotation()
     {   
-        Debug.Log("no more ghoomrha" + speed);
+        //Debug.Log("no more ghoomrha" + speed);
         Destroy(gameObject);
     }
 }

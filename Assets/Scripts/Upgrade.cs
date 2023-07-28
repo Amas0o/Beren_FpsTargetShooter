@@ -47,7 +47,7 @@ public class Upgrade : MonoBehaviour
         if (health <= 0)
         {
             //Debug.Log("Dead " + name);
-            GameManager.instance.Frenzy();
+            //GameManager.instance.Frenzy();
             temp = Instantiate(upgradeCollect, gameObject.transform.position, gameObject.transform.rotation);
             Destroy(gameObject);
         }

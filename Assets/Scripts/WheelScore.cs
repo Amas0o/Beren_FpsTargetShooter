@@ -24,8 +24,10 @@ public class WheelOfFortune : MonoBehaviour
         }
         var script = transform.parent.gameObject.GetComponent<WheelSpin>();
         script.StopRotation();
-        GameManager.instance.AddToScore(score);
-        Debug.Log("collision on" + gameObject.name);
+        transform.parent.gameObject.GetComponent<WheelSpin>().SetScore(score);
+        transform.parent.gameObject.GetComponent<WheelSpin>().Disable();
+        //GameManager.instance.AddToScore(score);
+        //Debug.Log("collision on" + gameObject.name);
     }
         
     
