@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject assault;
     [SerializeField] GameObject pistol;
     [SerializeField] GameObject shotgun;
+    [SerializeField] ParticleSystem FrenzyParticles;
     List<GameObject> instanceList;
     Gun pistolScript;
     Gun assaultScript;
@@ -150,7 +151,7 @@ public class GameManager : MonoBehaviour
         pistolScript.EnableFrenzy();
         assaultScript.EnableFrenzy();
         shotgunScript.EnableFrenzy();
-
+        FrenzyParticles.Play();
         StartCoroutine("FrenzyTimer");
         Debug.Log("Frenzy enabled");
     }
