@@ -9,7 +9,7 @@ public class WheelSpin : MonoBehaviour
     bool rotation;
     [SerializeField] float deathTime;
     [SerializeField] float brakeSpeed;
-    [SerializeField] GameObject WheelOfFortuneCollect;
+    [SerializeField] GameObject ScoreCollect;//WheelOfFortuneCollect;
     bool isNegative = false;
     int prospectiveScore;
     //HealthBarController timeBar;
@@ -46,7 +46,7 @@ public class WheelSpin : MonoBehaviour
             {
                 //Debug.Log("no more ghoomrha" + speed);
                 //Instantiate upgrade
-                temp = Instantiate(WheelOfFortuneCollect, gameObject.transform.position, gameObject.transform.rotation);
+                temp = Instantiate(ScoreCollect, gameObject.transform.position, gameObject.transform.rotation);
                 temp.GetComponent<bonusLerp>().SetBonus(prospectiveScore);
                 Destroy(gameObject);
             }

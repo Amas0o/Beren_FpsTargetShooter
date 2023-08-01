@@ -586,7 +586,7 @@ MonoBehaviour:
   speed: 500
   deathTime: 10
   brakeSpeed: 25
-  WheelOfFortuneCollect: {fileID: 4608742880037729808, guid: 8a494085baf60bc4eae071c5fca35b97, type: 3}
+  ScoreCollect: {fileID: 2079106261999059649, guid: 8c71d13d07edd4b4f88c9eca0a2342f7, type: 3}
 --- !u!1 &6991696918464831380
 GameObject:
   m_ObjectHideFlags: 0
