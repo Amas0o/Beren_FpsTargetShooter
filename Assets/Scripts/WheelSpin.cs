@@ -47,7 +47,7 @@ public class WheelSpin : MonoBehaviour
                 //Debug.Log("no more ghoomrha" + speed);
                 //Instantiate upgrade
                 temp = Instantiate(ScoreCollect, gameObject.transform.position, gameObject.transform.rotation);
-                temp.GetComponent<bonusLerp>().SetBonus(prospectiveScore);
+                temp.GetComponent<WheelBonusLerp>().SetBonus(prospectiveScore);
                 Destroy(gameObject);
             }
         }
