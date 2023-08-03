@@ -4,106 +4,142 @@ using TMPro;
 using UnityEditor.PackageManager;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour  // handles target spawning, score, masterclock, upgrade functionality in the game
 {
     public static  GameManager instance = null;
+
     [SerializeField] GameObject targetPrefab;             // Prefab of the target
     [SerializeField] GameObject bombPrefab;               // Prefab of the bomb
     [SerializeField] GameObject upgradePrefab;            // Prefab of the upgrade(bottle)
     [SerializeField] GameObject barrelPrefab;             // Prefab of the barrel
     [SerializeField] GameObject wheelPrefab;              // Prefab of the wheel of fortune
+
     [SerializeField] GameObject assault;                  // Assault rifle
     [SerializeField] GameObject pistol;                   // Pistol
     [SerializeField] GameObject shotgun;                  // Shotgun
+
     [SerializeField] ParticleSystem FrenzyParticles;      // visual effect when the frenzy is enabled
-    List<GameObject> instanceList;                        // List of all present targets for the master clock
-    Gun pistolScript;                                       
-    Gun assaultScript;
-    Gun shotgunScript;
-    [SerializeField] float frenzyTime;                    // duration of frenzy after the destruction of the bottle 
+
+    List<GameObject> instanceList;                        // List of all present targets used to call update on them (masterclock)
+
+    Gun pistolScript;                                     // used to hold pistol gun script
+    Gun assaultScript;                                    // used to hold assault rifle gun script 
+    Gun shotgunScript;                                    // used to hold shotgun gun script
+
+    [SerializeField] float frenzyTime;                    // duration of frenzy upgrade
+
     private int score = 0;                                // current score 
-    float x = 0;
-    float z = 0;
-    float y = 0;
+    float x = 0;                                          // used to hold temporary cordinates
+    float z = 0;                                          // used to hold temporary cordinates
+    float y = 0;                                          // used to hold temporary cordinates
+
     bool targetSpawn = true;                              // boolean variable to check if the target should be spawned
-    float targetSpawnTime;                                // time after which new target is spawned
     bool barrelSpawn = false;                             // boolean variable to check if the barrel should be spawned
-    float barrelSpawnTime;                                // time after which new barrel is spawned
-    float bombSpawnTime;                                  // time after which new bomb is spawned
     bool bombSpawn = false;                               // boolean variable to check if the bomb should be spawned
-    float upgradeSpawnTime;                               // time after which new upgrade(bottle) is spawned
     bool upgradeSpawn = false;                            // boolean variable to check if the upgrade(bottle) should be spawned
     bool wheelSpawn = true;                               // boolean variable to check if the wheel of fortune should be spawned
-    public TextMeshProUGUI scoreDisplay;                  // display of the current score
-    GameObject prefabInstance;
+    
+    float targetSpawnTime;                                // time after which new target is spawned
+    float barrelSpawnTime;                                // time after which new barrel is spawned
+    float bombSpawnTime;                                  // time after which new bomb is spawned
+    float upgradeSpawnTime;                               // time after which new upgrade(bottle) is spawned
+    
+    [SerializeField] TextMeshProUGUI scoreDisplay;        // used to hold UI element to show score
+    GameObject prefabInstance;                            // temporary gameObject
+    
     private void Start()
     {
+        // Starts all spawner timers
         StartCoroutine("bombSpawnCd");
         StartCoroutine("upgradeSpawnCd");
         StartCoroutine("barrelSpawnCd");
         StartCoroutine("wheelSpawnCd");
+
+        // Initializes scripts variables with the relevant scripts
         pistolScript = pistol.GetComponent<Gun>();
         assaultScript = assault.GetComponent<Gun>();
         shotgunScript = shotgun.GetComponent<Gun>();
+
+        // Initializes instance list
         instanceList = new List<GameObject>();
         
     }
     private void Update()
     {
-        if (targetSpawn)   // random spawining of the target
+        if (targetSpawn)   // handles spawining of the target if targetSpawn is true
         {
+            // Assigns random cordinates in the specified range
             x = Random.Range(-3.85f, 4.85f);
             z = Random.Range(-6f, 18f);
             y = Random.Range(-0.6f, 0.6f);
+
             prefabInstance = Instantiate(targetPrefab, new Vector3(x, y, z), Quaternion.Euler(90, 0, 0));
-            instanceList.Add(prefabInstance);
+            instanceList.Add(prefabInstance);   // adds newly created target into the instance List
+
             targetSpawn = false;
             StartCoroutine("spawnCd");
         }
-        if(bombSpawn)     // random spawining of the bomb
+
+        if(bombSpawn)     // handles spawining of the bomb if bombSpawn is true
         {
+            // Assigns random cordinates in the specified range
             x = Random.Range(-3.85f, 4.85f);
             z = Random.Range(-6f, 6f);
             y = Random.Range(0f, 1.7f);
+
             prefabInstance = Instantiate(bombPrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
-            instanceList.Add(prefabInstance);
+            instanceList.Add(prefabInstance);   // adds newly created target into the instance List
+
             bombSpawn = false;
             StartCoroutine("bombSpawnCd");
         }
-        if (upgradeSpawn)   // random spawining of the upgrade(bottle)
+
+        if (upgradeSpawn)   // handles spawining of the upgrade if upgradeSpawn is true
         {
+            // Assigns random cordinates in the specified range
             x = Random.Range(-3.85f, 4.85f);
             z = Random.Range(-6f, 6f);
             y = Random.Range(0f, 1.7f);
+
             prefabInstance = Instantiate(upgradePrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
-            instanceList.Add(prefabInstance);
+            instanceList.Add(prefabInstance);  // adds newly created target into the instance List
+
             upgradeSpawn = false;
             StartCoroutine("upgradeSpawnCd");
         }
-        if (barrelSpawn)   // random spawining of the barrel
+
+        if (barrelSpawn)   // handles spawining of the barrel if barrelSpawn is true
         {
+            // Assigns random cordinates in the specified range
             x = Random.Range(-3.85f, 4.85f);
             z = Random.Range(-6f, 6f);
             y = Random.Range(0f, 1.7f);
+            
             prefabInstance = Instantiate(barrelPrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
-            instanceList.Add(prefabInstance);
+            instanceList.Add(prefabInstance);  // adds newly created target into the instance List
+
             barrelSpawn = false;
             StartCoroutine("barrelSpawnCd");
         }
-        if (wheelSpawn)   // random spawining of the wheels of fortune
+        if (wheelSpawn)   // handles spawining of the wheel of fortune if wheelSpawn is true
         {
+            // Assigns random cordinates in the specified range (here x and z both are used to specify the z cordinate)
             x = Random.Range(-6f, 6f);
             z = Random.Range(-6f, 6f);
+
             prefabInstance = Instantiate(wheelPrefab, new Vector3(3f, 7.54f, x), Quaternion.Euler(0, 0, 0));
-            instanceList.Add(prefabInstance);
+            instanceList.Add(prefabInstance);  // adds newly created target into the instance List
+
             prefabInstance = Instantiate(wheelPrefab, new Vector3(-2.64f, 7.54f, z), Quaternion.Euler(0, 0, 0));
-            prefabInstance.GetComponent<WheelSpin>().SetisNegative();
-            instanceList.Add(prefabInstance);
+            prefabInstance.GetComponent<WheelSpin>().SetisNegative(); // negates the speed to make wheel spin in other direction
+            instanceList.Add(prefabInstance); // adds newly created target into the instance List
+
             wheelSpawn = false;
             StartCoroutine("wheelSpawnCd");
         }
-        scoreDisplay.SetText(score.ToString());  // score display
-        instanceList.RemoveAll(IsNull);
+
+        scoreDisplay.SetText(score.ToString());  // updates scoreDisplay with the current score
+        instanceList.RemoveAll(IsNull);          // removes all destroyed/Null gameObjects from intance list
         
 
         foreach (GameObject item in instanceList)  // calling update instances of each target in the list for the master clock
@@ -169,7 +205,6 @@ public class GameManager : MonoBehaviour
 
     IEnumerator bombSpawnCd()  // spawing bomb at random times
     {
-        //Debug.Log("me is work");
         bombSpawnTime = Random.Range(5, 10);
         yield return new WaitForSeconds(bombSpawnTime);
         bombSpawn = true;
@@ -177,7 +212,6 @@ public class GameManager : MonoBehaviour
 
     IEnumerator upgradeSpawnCd()  // spawing upgrade(bottle) at random times
     {
-        //Debug.Log("me is work");
         upgradeSpawnTime = Random.Range(10, 15);
         yield return new WaitForSeconds(upgradeSpawnTime);
         upgradeSpawn = true;
@@ -185,7 +219,6 @@ public class GameManager : MonoBehaviour
 
     IEnumerator barrelSpawnCd()    // spawing barrel at random times
     {
-        //Debug.Log("me is work");
         barrelSpawnTime = Random.Range(10, 15);
         yield return new WaitForSeconds(barrelSpawnTime);
         barrelSpawn = true;
@@ -204,7 +237,7 @@ public class GameManager : MonoBehaviour
         shotgunScript.DisableFrenzy();
     }
 
-    bool IsNull(GameObject test)
+    bool IsNull(GameObject test)   // test for gameObject equals to Null
     {
         if(test == null)
         {

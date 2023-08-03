@@ -10,31 +10,35 @@ public class Target : MonoBehaviour
     [SerializeField] float deathTime;             // lifetime of the target
     HealthBarController healthBar;                // visual display of current health of the target
     HealthBarController timeBar;                  // visual display of the reamaining target lifetime
-    float maxHealth;
-    float elaspedTime;
+    float maxHealth;                              // variable to store maxiumum possible health of target
+    float elaspedTime;                            // time elasped after spawing of the target
     [SerializeField] GameObject scoreVisual;      // floating visual of the score that the player will gain
     GameObject temp;                              // temporary variable for instantiating the scoreVisual
     private void Awake()
     {
+        // Basic initialization of variables
         prospectiveScore = 100;
         maxHealth = health;
+        elaspedTime = 0;
+        
         healthBar = GetComponentInChildren<HealthBarController>();
         timeBar = GetComponentsInChildren<HealthBarController>()[1];
+        healthBar.UpdateHealth(health, maxHealth);   // initializing health bar at max health
+
         if (healthBar == null)
         {
             Debug.Log("error");
         }
-        elaspedTime = 0;
+        
     }
-    private void Start()
+    public void UpdateInstance()    // Handles all the time related update functionality, called by the master clock
     {
-        healthBar.UpdateHealth(health, maxHealth);   // initializing health bar at max health
-    }
-    public void UpdateInstance()    // this function is the Update Instance for the master clock and is called in the Game Manager
-    {
-        elaspedTime+= Time.deltaTime;
+        //Increments elaspedTime with time passed in between function calls and updates timeBar bar to reflect that value
+        elaspedTime += Time.deltaTime;
         timeBar.UpdateHealth(deathTime-elaspedTime, deathTime);
-        if(elaspedTime >= deathTime)
+
+        //Destroys gameObject if lifetime of object has passed
+        if (elaspedTime >= deathTime)
         {
             Destroy(gameObject);
         }
@@ -42,8 +46,10 @@ public class Target : MonoBehaviour
 
     public void AddDamage(float damage)  // gives damage to the target when shot
     {
+        //Decrements health with damage taken and updates healthBar bar to reflect that value
         health -= damage;
         healthBar.UpdateHealth(health, maxHealth);
+
         if (health <= 0)    // when the health reaches zero, target is destroyed and the score is added
         {
             GameManager.instance.AddToScore(prospectiveScore);

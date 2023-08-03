@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponSwitching : MonoBehaviour
+public class WeaponSwitching : MonoBehaviour   // handles weapon switching functionality
 {
-    int selectedWeapon = 0;
-    [SerializeField] GameObject crosshair;
+    int selectedWeapon = 0;                   // index of current weapon selected
+    [SerializeField] GameObject crosshair;    // hold UI element containing crosshair
     void Start()
     {
         SelectWeapon();
@@ -13,8 +13,11 @@ public class WeaponSwitching : MonoBehaviour
 
     void Update()
     {
-        int previousSelectedWeapon = selectedWeapon;
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+
+        int previousSelectedWeapon = selectedWeapon; // saves current index
+
+        // Gets scrollwheel input and if scrowheel was moved changes the selected weapon index
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f) 
         {
             if (selectedWeapon >= transform.childCount - 1)
                 selectedWeapon = 0;
@@ -27,10 +30,12 @@ public class WeaponSwitching : MonoBehaviour
             else selectedWeapon--;
         }
 
+        // checks if previous index is not equal to current index and calls weapon select
         if (previousSelectedWeapon != selectedWeapon)
         {
             if (!crosshair.activeSelf)
             {
+                // handling crosshair and laser switching in between weapon switching
                 crosshair.SetActive(true);
                 transform.GetChild(previousSelectedWeapon).GetComponent<Gun>().TurnLaserOff();
             }
@@ -40,9 +45,11 @@ public class WeaponSwitching : MonoBehaviour
 
     }
 
-    void SelectWeapon()
+    void SelectWeapon()  // changes the selected weapon according to the current selectedWeapon index
     {
         int i = 0;
+        
+        // sets active the weapon on selectedWeapon Index
         foreach (Transform weapon in transform)
         {
             if (i == selectedWeapon)

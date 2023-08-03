@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
-public class Bomb : MonoBehaviour
+public class Bomb : MonoBehaviour               // implements bomb functionality
 {
     [SerializeField] float health;              // health of the bomb
     [SerializeField] float deathTime;           // lifetime of the bomb
@@ -10,33 +12,37 @@ public class Bomb : MonoBehaviour
     HealthBarController healthBar;              // visual display of current health of the bomb
     HealthBarController timeBar;                // visual display of the reamaining bomb lifetime
     float elaspedTime;                          // time elasped after spawing of the bomb
-    float maxHealth;
+    float maxHealth;                            // variable to store maxiumum possible health of target
     [SerializeField] GameObject scoreVisual;    // floating visual of the score that the player will gain
     GameObject temp;                            // temporary variable for instantiating the scoreVisual
     
 
     private void Awake()
     {
+        // Basic initialization of variables
         maxHealth = health;
+        
         healthBar = GetComponentInChildren<HealthBarController>();
+        healthBar.UpdateHealth(health, maxHealth);  // initializing health bar at max health
+
         timeBar = GetComponentsInChildren<HealthBarController>()[1];
+
         if (healthBar == null)
         {
             Debug.Log("error");
         }
+
         elaspedTime = 0;
        
     }
-    void Start()
-    {
-        healthBar.UpdateHealth(health, maxHealth);  // initializing health bar at max health
-    }
-
     
-    public void UpdateInstance()  // this function is the Update Instance for the master clock and is called in the Game Manager
+    public void UpdateInstance()  // Handles all the time related update functionality, called by the master clock
     {
+        //Increments elaspedTime with time passed in between function calls and updates timeBar bar to reflect that value
         elaspedTime += Time.deltaTime;
         timeBar.UpdateHealth(deathTime - elaspedTime, deathTime);
+
+        //Destroys gameObject if lifetime of object has passed
         if (elaspedTime >= deathTime)
         {
             Destroy(gameObject);
@@ -44,9 +50,11 @@ public class Bomb : MonoBehaviour
     }
 
     public void AddDamage(float damage)  // gives damage to the bomb when shot
-    { 
+    {
+        //Decrements health with damage taken and updates healthBar bar to reflect that value
         health -= damage;
         healthBar.UpdateHealth(health, maxHealth);
+
         if (health <= 0)  // when the health reaches zero, bomb is destroyed and the negative score is added i.e the player loses points
         {   
             GameManager.instance.AddToScore(prospectiveScore);

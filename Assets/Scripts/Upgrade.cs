@@ -8,41 +8,48 @@ public class Upgrade : MonoBehaviour
     [SerializeField] float deathTime;                 // lifetime of the upgrdae
     HealthBarController healthBar;                    // visual display of current health of the upgrade
     HealthBarController timeBar;                      // visual display of the reamaining upgrade lifetime
-    float elaspedTime;
-    float maxHealth;
+    float elaspedTime;                                // time elasped after spawing of the upgrade
+    float maxHealth;                                  // variable to store maxiumum possible health of target
     [SerializeField] GameObject upgradeCollect;       // duplicate upgrade prefab for the upgrade collection effect
     GameObject temp;                                  // temporary variable for instantiating the duplicate upgrade
 
 
     private void Awake()
     {
+        // Basic initialization of variables
         maxHealth = health;
+        elaspedTime = 0;
+
         healthBar = GetComponentInChildren<HealthBarController>();
         timeBar = GetComponentsInChildren<HealthBarController>()[1];
+        healthBar.UpdateHealth(health, maxHealth);    // initializing health bar at max health
+
         if (healthBar == null)
         {
             Debug.Log("error");
         }
-        elaspedTime = 0;
+        
     }
 
-    public void UpdateInstance()   // this function is the Update Instance for the master clock and is called in the Game Manager
+    public void UpdateInstance()   // Handles all the time related update functionality, called by the master clock
     {
+        //Increments elaspedTime with time passed in between function calls and updates timeBar bar to reflect that value
         elaspedTime += Time.deltaTime;
         timeBar.UpdateHealth(deathTime - elaspedTime, deathTime);
+
+        //Destroys gameObject if lifetime of object has passed
         if (elaspedTime >= deathTime)
         {
             Destroy(gameObject);
         }
     }
-    private void Start()
-    {
-        healthBar.UpdateHealth(health, maxHealth);    // initializing health bar at max health
-    }
     public void AddDamage(float damage)   // gives damage to the upgrade when shot
     {
+        //Decrements health with damage taken and updates healthBar bar to reflect that value
         health -= damage;
         healthBar.UpdateHealth(health, maxHealth);
+
+        // when the health reaches zero, target is destroyed and the score is added
         if (health <= 0) 
         {
             temp = Instantiate(upgradeCollect, gameObject.transform.position, gameObject.transform.rotation);

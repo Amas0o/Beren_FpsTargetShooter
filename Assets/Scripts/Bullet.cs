@@ -2,40 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour    // handles functionality of gun bullets
 {
     [SerializeField] float deathTime;  // bullet lifetime
-
+    [SerializeField] float damage;     // damage that the bullet deals to targets
     private void Start()
     {
-        StartCoroutine("Death"); 
+        StartCoroutine("Death");       // starts coroutine to delete bullet after deathTime has passed
     }
 
     private void OnCollisionEnter(Collision collision)  // deals damage to the targets
     {
-        
+        // Checks tag of the target hit and gets the relevant script to call the addDamage function on that target
         if(collision.gameObject.tag == "Target" )
         {
-            var script = collision.gameObject.GetComponent<Target>();
-            script.AddDamage(10);
+            collision.gameObject.GetComponent<Target>().AddDamage(damage);
 
         }
         if (collision.gameObject.tag == "Bomb")
         {
-            var script = collision.gameObject.GetComponent<Bomb>();
-            script.AddDamage(10);
+            collision.gameObject.GetComponent<Bomb>().AddDamage(damage);
 
         }
         if (collision.gameObject.tag == "Upgrade")
         {
-            var script = collision.gameObject.GetComponent<Upgrade>();
-            script.AddDamage(10);
+            collision.gameObject.GetComponent<Upgrade>().AddDamage(damage);
 
         }
         if (collision.gameObject.tag == "Barrel")
         {
-            var script = collision.gameObject.GetComponent<Barrel>();
-            script.AddDamage(10);
+            collision.gameObject.GetComponent<Barrel>().AddDamage(damage);
 
         }
         if ((collision.gameObject.tag == "Bullet"))

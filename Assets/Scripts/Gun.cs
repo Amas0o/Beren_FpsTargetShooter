@@ -8,7 +8,6 @@ public class Gun : MonoBehaviour
     //bullet 
     [SerializeField] GameObject bullet;
     
-
     //bullet force
     [SerializeField] float shootForce, upwardForce;
 
@@ -16,15 +15,11 @@ public class Gun : MonoBehaviour
     [SerializeField] float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
     [SerializeField] int magazineSize, bulletsPerTap;
     [SerializeField] bool allowButtonHold;
-
     int bulletsLeft, bulletsShot;
-
-    //Recoil
-    //public Rigidbody playerRb;
-    //public float recoilForce;
 
     //bools
     bool shooting, readyToShoot, reloading;
+    bool laserActive = false;
 
     //Reference
     [SerializeField] Camera fpsCam;
@@ -32,12 +27,8 @@ public class Gun : MonoBehaviour
     [SerializeField] GameObject bulletPoint;
     [SerializeField] GameObject laserPoint;
     [SerializeField] GameObject laser;
-    bool laserActive = false;
     [SerializeField] GameObject crosshair;
-
-    //Graphics
-    //public GameObject muzzleFlash;
-    public TextMeshProUGUI ammunitionDisplay;
+    [SerializeField] TextMeshProUGUI ammunitionDisplay;
 
     //bug fixing :D
     public bool allowInvoke = true;
@@ -53,15 +44,14 @@ public class Gun : MonoBehaviour
         readyToShoot = true;
     }
 
-    private void Start()
+    private void Start() // Initializes shootingSound with the audioSource and disables the laser
     {
         shootingSound = GetComponent<AudioSource>();
         laser.SetActive(false);
- 
-
     }
     private void Update()
     {
+        // toggles laser if right mouse button pressed and changes the bullet spawn point accordingly
         if (Input.GetKeyDown(KeyCode.Mouse1) && !laserActive)
         {
             attackPoint.position = laserPoint.transform.position;

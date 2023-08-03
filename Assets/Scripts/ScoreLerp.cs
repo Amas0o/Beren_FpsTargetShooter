@@ -10,21 +10,19 @@ public class ScoreLerp : MonoBehaviour
     [SerializeField] float duration;            // duration of the floating score effect
     [SerializeField] float lerpDistance;        // distance the score(text) travels
     [SerializeField] TextMeshProUGUI text;      // score 
-    
-    void Update()
+    float timeElapsed = 0f;                     // used to keep track of time passed since object movement
+    void Update() // calls the lerp function to move the player every frame
     {
         Lerping();
     }
-
-
-    float timeElapsed = 0f;
+    
     void Lerping()   // function responsible for the score floating (vertical) effect 
     {
         Vector3 startPos = transform.position;
         if (timeElapsed < duration)
         {
             transform.position = Vector3.Lerp(startPos, new Vector3(transform.position.x, transform.position.y + lerpDistance, transform.position.z), timeElapsed / duration);
-            timeElapsed += Time.deltaTime;
+            timeElapsed += Time.deltaTime; //Increments timeElasped with time passed in between function calls
         }
         else
             Destroy(gameObject);
