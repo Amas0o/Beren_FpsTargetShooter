@@ -5,20 +5,20 @@ using UnityEngine;
 
 public class Barrel : MonoBehaviour
 {
-    [SerializeField] float health;
-    [SerializeField] float deathTime;
-    [SerializeField] ParticleSystem explosion;
-    [SerializeField] float radius;
-    [SerializeField] float damage;
-    [SerializeField] int prospectiveScore;
-    [SerializeField] GameObject scoreVisual;
-    GameObject temp;
-    float elaspedTime;
-    HealthBarController healthBar;
-    HealthBarController timeBar;
-    float maxHealth;
-    AudioSource explosionSound;
-    Target targetScript;
+    [SerializeField] float health;              // health of the barrel
+    [SerializeField] float deathTime;           // barrel lifetime
+    [SerializeField] ParticleSystem explosion; 
+    [SerializeField] float radius;              // radius within which surrounding objects will be damaged
+    [SerializeField] float damage;              // damage to surrounding objects
+    [SerializeField] int prospectiveScore;      // score that the player will gain upon barrel's destruction 
+    [SerializeField] GameObject scoreVisual;    // floating visual of the score that the player will gain
+    GameObject temp;                            // temporary variable for instantiating the scoreVisual
+    float elaspedTime;                          // time elasped after spawing of the barrel
+    HealthBarController healthBar;              // visual display of current health of the barrel
+    HealthBarController timeBar;                // visual display of the reamaining barrel lifetime
+    float maxHealth;                            
+    AudioSource explosionSound;                 
+    Target targetScript;                        
     Bomb bombScript;
     Upgrade upgradeScript;
     Barrel barrelScript;
@@ -33,17 +33,20 @@ public class Barrel : MonoBehaviour
         {
             Debug.Log("error");
         }
-        //StartCoroutine("Death");
+        
     }
     private void Start()
     {
-        //StartCoroutine("Death");
-        healthBar.UpdateHealth(health, maxHealth);
-        explosion.transform.position = gameObject.transform.position;
-        explosionSound = gameObject.GetComponent<AudioSource>();
+        
+        healthBar.UpdateHealth(health, maxHealth);                     // initializing health bar at max health
+        explosion.transform.position = gameObject.transform.position;  // initializing the position of the explosion effect
+        explosionSound = gameObject.GetComponent<AudioSource>();       
         elaspedTime = 0;
     }
-    public void UpdateInstance()
+
+
+    
+    public void UpdateInstance()  // this function is the Update Instance for the master clock and is called in the Game Manager
     {
         elaspedTime += Time.deltaTime;
         timeBar.UpdateHealth(deathTime - elaspedTime, deathTime);
@@ -53,16 +56,12 @@ public class Barrel : MonoBehaviour
         }
     }
 
-    public void AddDamage(float damage)
+    public void AddDamage(float damage)  // gives damage to the barrel when shot
     {
-        //Debug.Log("Took damage" +  damage); 
         health -= damage;
         healthBar.UpdateHealth(health, maxHealth);
-        if (health <= 0)
+        if (health <= 0)  // when the health reaches zero, barrel is destroyed, it deals damage to the surrounding objects and adds the score
         {
-            //Debug.Log("Dead " + name);
-            //GameManager.instance.AddToScore(prospectiveScore);
-           
             gameObject.GetComponent<Collider>().enabled = false;
             Explode();
             explosion.Play();
@@ -75,20 +74,16 @@ public class Barrel : MonoBehaviour
         }
     }
 
-    IEnumerator Death()
-    {
-        yield return new WaitForSeconds(deathTime);
-        Destroy(gameObject);
-    }
+
 
     IEnumerator ExplosionDelay()
     {
         yield return new WaitForSeconds(0.9f);
         Destroy(gameObject);
     }
-    public void Explode()
+    public void Explode() // function responsible for dealing damage to the surrounding objects upon barrel's destruction
     {
-        //Debug.Log("hello hello check" );
+        
         colliders = Physics.OverlapSphere(gameObject.transform.position, radius);
         Debug.Log("hello hello" + colliders.Length);
         for(int i = 0; i < colliders.Length; i++)

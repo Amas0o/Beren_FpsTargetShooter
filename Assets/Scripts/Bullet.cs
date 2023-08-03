@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] float deathTime;
+    [SerializeField] float deathTime;  // bullet lifetime
 
     private void Start()
     {
-        StartCoroutine("Death");
+        StartCoroutine("Death"); 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)  // deals damage to the targets
     {
-        
-        //Debug.Log(collision.gameObject.name);
         
         if(collision.gameObject.tag == "Target" )
         {
@@ -40,18 +38,15 @@ public class Bullet : MonoBehaviour
             script.AddDamage(10);
 
         }
-        if ((collision.gameObject.tag == "Bullet") || (collision.gameObject.tag == "Pellet") )
+        if ((collision.gameObject.tag == "Bullet"))
         {
             return;
         }
-        //Debug.Log("Collided with" + collision.gameObject.name);
+        
         Destroy(gameObject);    
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log(collision.gameObject.name);
-    }
-    IEnumerator Death()
+
+    IEnumerator Death() // bullet is destroyed after a certain time
     {
         yield return new WaitForSeconds(deathTime);
         Destroy(gameObject);

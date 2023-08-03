@@ -6,17 +6,17 @@ using UnityEngine;
 
 public class WheelBonusLerp : MonoBehaviour
 {
-    [SerializeField] float duration;
-    GameObject referenceObject;
-    [SerializeField] TextMeshProUGUI text;
-    Vector3 startPos;
-    int scoreBonus;
+    [SerializeField] float duration;         // time within which the wheel bonus moves towards the player
+    GameObject referenceObject;              // Player
+    [SerializeField] TextMeshProUGUI text;   // the bonus
+    Vector3 startPos;                        // Start position of the bonus visual i.e the position where wheel is destroyed
+    int scoreBonus;                          // the bonus score the player will recieve when it shoots the wheel
 
 
-    // Start is called before the first frame update
+    
     void Start()
     {
-        referenceObject = GameObject.FindGameObjectWithTag("Player");
+        referenceObject = GameObject.FindGameObjectWithTag("Player");  
         startPos = transform.position;
     }
 
@@ -27,7 +27,7 @@ public class WheelBonusLerp : MonoBehaviour
     }
 
     float timeElapsed = 0f;
-    void Lerping()
+    void Lerping()   // function  responsible for the floating bonus effect
     {
         timeElapsed += Time.deltaTime;
         if (timeElapsed < duration)
@@ -43,7 +43,7 @@ public class WheelBonusLerp : MonoBehaviour
         }
     }
 
-    public void SetBonus(int score)
+    public void SetBonus(int score) 
     {
         scoreBonus = score;
         text.SetText("+" + score.ToString());

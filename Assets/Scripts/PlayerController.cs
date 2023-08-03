@@ -6,13 +6,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    Vector3 move_direction;
-    [SerializeField] float speed;
-    [SerializeField] float sprintSpeed;
-    CharacterController characterController;
-    float verticalSpeed;
-    [SerializeField] float jumpForce;
-    [SerializeField] float gravity;
+    Vector3 move_direction;                      // player's direction of movement
+    [SerializeField] float speed;                // player's speed
+    [SerializeField] float sprintSpeed;          // player's speed while sprinting
+    CharacterController characterController;     // controller script
+    float verticalSpeed;                           
+    [SerializeField] float jumpForce;            // jump force of the player
+    [SerializeField] float gravity;              
     float tempSpeed;
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         move_direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));

@@ -56,7 +56,6 @@ public class Gun : MonoBehaviour
     private void Start()
     {
         shootingSound = GetComponent<AudioSource>();
-        //laser = attackPoint.GetComponent<LineRenderer>();
         laser.SetActive(false);
  
 
@@ -80,7 +79,7 @@ public class Gun : MonoBehaviour
 
         MyInput();
 
-        //Set ammo display, if it exists :D
+        //Set ammo display, if it exists
         if (ammunitionDisplay != null)
             ammunitionDisplay.SetText(bulletsLeft / bulletsPerTap + " / " + magazineSize / bulletsPerTap);
     }
@@ -110,16 +109,6 @@ public class Gun : MonoBehaviour
         muzzleFlash.Play();
         readyToShoot = false;
         shootingSound.Play();
-        //Find the exact hit position using a raycast
-        //Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); //Just a ray through the middle of your current view
-        //RaycastHit hit;
-
-        //check if ray hits something
-        //Vector3 targetPoint;
-        //if (Physics.Raycast(ray, out hit))
-        //    targetPoint = hit.point;
-        //else
-        //    targetPoint = ray.GetPoint(75); //Just a point far away from the player
 
         //Calculate direction from attackPoint to targetPoint
         Vector3 directionWithoutSpread = attackPoint.position;
@@ -134,15 +123,10 @@ public class Gun : MonoBehaviour
         //Instantiate bullet/projectile
         GameObject currentBullet = Instantiate(bullet, attackPoint.position, attackPoint.rotation); //store instantiated bullet in currentBullet
         //Rotate bullet to shoot direction
-        //currentBullet.transform.forward = directionWithSpread.normalized;
 
         //Add forces to bullet
         currentBullet.GetComponent<Rigidbody>().AddForce(currentBullet.transform.forward * shootForce, ForceMode.Impulse);
-        //currentBullet.GetComponent<Rigidbody>().AddForce(fpsCam.transform.up * upwardForce, ForceMode.Impulse);
 
-        //Instantiate muzzle flash, if you have one
-        //if (muzzleFlash != null)
-            //Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
 
         bulletsLeft--;
         bulletsShot++;

@@ -4,17 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 public class HealthBarController : MonoBehaviour
 {
-    [SerializeField] Slider slider;
+    [SerializeField] Slider slider;   // health bar
 
     
-    public void UpdateHealth(float currentHealth,float maxHealth)
+    public void UpdateHealth(float currentHealth,float maxHealth)    // updating health bar
     {
         slider.value = currentHealth/maxHealth;
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

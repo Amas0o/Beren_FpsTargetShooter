@@ -7,34 +7,34 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static  GameManager instance = null;
-    [SerializeField] GameObject targetPrefab;
-    [SerializeField] GameObject bombPrefab;
-    [SerializeField] GameObject upgradePrefab;
-    [SerializeField] GameObject barrelPrefab;
-    [SerializeField] GameObject wheelPrefab;
-    [SerializeField] GameObject assault;
-    [SerializeField] GameObject pistol;
-    [SerializeField] GameObject shotgun;
-    [SerializeField] ParticleSystem FrenzyParticles;
-    List<GameObject> instanceList;
-    Gun pistolScript;
+    [SerializeField] GameObject targetPrefab;             // Prefab of the target
+    [SerializeField] GameObject bombPrefab;               // Prefab of the bomb
+    [SerializeField] GameObject upgradePrefab;            // Prefab of the upgrade(bottle)
+    [SerializeField] GameObject barrelPrefab;             // Prefab of the barrel
+    [SerializeField] GameObject wheelPrefab;              // Prefab of the wheel of fortune
+    [SerializeField] GameObject assault;                  // Assault rifle
+    [SerializeField] GameObject pistol;                   // Pistol
+    [SerializeField] GameObject shotgun;                  // Shotgun
+    [SerializeField] ParticleSystem FrenzyParticles;      // visual effect when the frenzy is enabled
+    List<GameObject> instanceList;                        // List of all present targets for the master clock
+    Gun pistolScript;                                       
     Gun assaultScript;
     Gun shotgunScript;
-    [SerializeField] float frenzyTime;
-    private int score = 0;
+    [SerializeField] float frenzyTime;                    // duration of frenzy after the destruction of the bottle 
+    private int score = 0;                                // current score 
     float x = 0;
     float z = 0;
     float y = 0;
-    bool targetSpawn = true;
-    float targetSpawnTime;
-    bool barrelSpawn = false;
-    float barrelSpawnTime;
-    float bombSpawnTime;
-    bool bombSpawn = false;
-    float upgradeSpawnTime;
-    bool upgradeSpawn = false;
-    bool wheelSpawn = true;
-    public TextMeshProUGUI scoreDisplay;
+    bool targetSpawn = true;                              // boolean variable to check if the target should be spawned
+    float targetSpawnTime;                                // time after which new target is spawned
+    bool barrelSpawn = false;                             // boolean variable to check if the barrel should be spawned
+    float barrelSpawnTime;                                // time after which new barrel is spawned
+    float bombSpawnTime;                                  // time after which new bomb is spawned
+    bool bombSpawn = false;                               // boolean variable to check if the bomb should be spawned
+    float upgradeSpawnTime;                               // time after which new upgrade(bottle) is spawned
+    bool upgradeSpawn = false;                            // boolean variable to check if the upgrade(bottle) should be spawned
+    bool wheelSpawn = true;                               // boolean variable to check if the wheel of fortune should be spawned
+    public TextMeshProUGUI scoreDisplay;                  // display of the current score
     GameObject prefabInstance;
     private void Start()
     {
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        if (targetSpawn)
+        if (targetSpawn)   // random spawining of the target
         {
             x = Random.Range(-3.85f, 4.85f);
             z = Random.Range(-6f, 18f);
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
             targetSpawn = false;
             StartCoroutine("spawnCd");
         }
-        if(bombSpawn)
+        if(bombSpawn)     // random spawining of the bomb
         {
             x = Random.Range(-3.85f, 4.85f);
             z = Random.Range(-6f, 6f);
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
             bombSpawn = false;
             StartCoroutine("bombSpawnCd");
         }
-        if (upgradeSpawn)
+        if (upgradeSpawn)   // random spawining of the upgrade(bottle)
         {
             x = Random.Range(-3.85f, 4.85f);
             z = Random.Range(-6f, 6f);
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
             upgradeSpawn = false;
             StartCoroutine("upgradeSpawnCd");
         }
-        if (barrelSpawn)
+        if (barrelSpawn)   // random spawining of the barrel
         {
             x = Random.Range(-3.85f, 4.85f);
             z = Random.Range(-6f, 6f);
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
             barrelSpawn = false;
             StartCoroutine("barrelSpawnCd");
         }
-        if (wheelSpawn)
+        if (wheelSpawn)   // random spawining of the wheels of fortune
         {
             x = Random.Range(-6f, 6f);
             z = Random.Range(-6f, 6f);
@@ -102,10 +102,11 @@ public class GameManager : MonoBehaviour
             wheelSpawn = false;
             StartCoroutine("wheelSpawnCd");
         }
-        scoreDisplay.SetText(score.ToString());
+        scoreDisplay.SetText(score.ToString());  // score display
         instanceList.RemoveAll(IsNull);
-        //Debug.Log("List size is " + instanceList.Count);
-        foreach (GameObject item in instanceList)
+        
+
+        foreach (GameObject item in instanceList)  // calling update instances of each target in the list for the master clock
         {
             if (item.tag == "Target")
             {
@@ -143,35 +144,30 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-    public void AddToScore(int addScore)
+    public void AddToScore(int addScore)  // score addition
     {
         score += addScore;
-        //Debug.Log("New Score is " + score);
     }
 
-    public void Frenzy()
+    public void Frenzy()  // enabling frenzy for a certain time
     {
-        
-
         pistolScript.EnableFrenzy();
         assaultScript.EnableFrenzy();
         shotgunScript.EnableFrenzy();
         FrenzyParticles.Play();
         StartCoroutine("FrenzyTimer");
-        Debug.Log("Frenzy enabled");
     }
 
     
 
-    IEnumerator spawnCd()
+    IEnumerator spawnCd()  // spawing target at random times
     {
-        //Debug.Log("me is work");
         targetSpawnTime = Random.Range(3, 6);
         yield return new WaitForSeconds(targetSpawnTime);
         targetSpawn = true;
     }
 
-    IEnumerator bombSpawnCd()
+    IEnumerator bombSpawnCd()  // spawing bomb at random times
     {
         //Debug.Log("me is work");
         bombSpawnTime = Random.Range(5, 10);
@@ -179,7 +175,7 @@ public class GameManager : MonoBehaviour
         bombSpawn = true;
     }
 
-    IEnumerator upgradeSpawnCd()
+    IEnumerator upgradeSpawnCd()  // spawing upgrade(bottle) at random times
     {
         //Debug.Log("me is work");
         upgradeSpawnTime = Random.Range(10, 15);
@@ -187,19 +183,19 @@ public class GameManager : MonoBehaviour
         upgradeSpawn = true;
     }
 
-    IEnumerator barrelSpawnCd()
+    IEnumerator barrelSpawnCd()    // spawing barrel at random times
     {
         //Debug.Log("me is work");
         barrelSpawnTime = Random.Range(10, 15);
         yield return new WaitForSeconds(barrelSpawnTime);
         barrelSpawn = true;
     }
-    IEnumerator wheelSpawnCd()
+    IEnumerator wheelSpawnCd()     // spawing wheels of fortune at random times
     {
         yield return new WaitForSeconds(20f);
         wheelSpawn = true; 
     }
-    IEnumerator FrenzyTimer()
+    IEnumerator FrenzyTimer()      // disabling of frenzy after a certain time
     {
         yield return new WaitForSeconds(frenzyTime);
         

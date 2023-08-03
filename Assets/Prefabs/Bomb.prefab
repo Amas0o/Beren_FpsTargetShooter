@@ -14909,6 +14909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   deathTime: 4
+  prospectiveScore: -100
   scoreVisual: {fileID: 3042264280243945401, guid: 224bd4b3ad270ab45a5824fd4e188aa0, type: 3}
 --- !u!1 &2706622165558107270
 GameObject:

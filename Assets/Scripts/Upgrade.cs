@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Upgrade : MonoBehaviour
 {
-    [SerializeField] float health;
-    [SerializeField] float deathTime;
-    HealthBarController healthBar;
-    HealthBarController timeBar;
+    [SerializeField] float health;                    // health of the upgrade
+    [SerializeField] float deathTime;                 // lifetime of the upgrdae
+    HealthBarController healthBar;                    // visual display of current health of the upgrade
+    HealthBarController timeBar;                      // visual display of the reamaining upgrade lifetime
     float elaspedTime;
     float maxHealth;
-    [SerializeField] GameObject upgradeCollect;
-    GameObject temp;
-    // Update is called once per frame
+    [SerializeField] GameObject upgradeCollect;       // duplicate upgrade prefab for the upgrade collection effect
+    GameObject temp;                                  // temporary variable for instantiating the duplicate upgrade
+
+
     private void Awake()
     {
         maxHealth = health;
@@ -23,10 +24,9 @@ public class Upgrade : MonoBehaviour
             Debug.Log("error");
         }
         elaspedTime = 0;
-        //StartCoroutine("Death");
     }
 
-    public void UpdateInstance()
+    public void UpdateInstance()   // this function is the Update Instance for the master clock and is called in the Game Manager
     {
         elaspedTime += Time.deltaTime;
         timeBar.UpdateHealth(deathTime - elaspedTime, deathTime);
@@ -37,24 +37,17 @@ public class Upgrade : MonoBehaviour
     }
     private void Start()
     {
-        healthBar.UpdateHealth(health, maxHealth);
+        healthBar.UpdateHealth(health, maxHealth);    // initializing health bar at max health
     }
-    public void AddDamage(float damage)
+    public void AddDamage(float damage)   // gives damage to the upgrade when shot
     {
-        //Debug.Log("Took damage" +  damage); 
         health -= damage;
         healthBar.UpdateHealth(health, maxHealth);
-        if (health <= 0)
+        if (health <= 0) 
         {
-            //Debug.Log("Dead " + name);
-            //GameManager.instance.Frenzy();
             temp = Instantiate(upgradeCollect, gameObject.transform.position, gameObject.transform.rotation);
             Destroy(gameObject);
         }
     }
 
-    IEnumerator Death() { 
-        yield return new WaitForSeconds(deathTime);
-        Destroy(gameObject);
-    }
 }

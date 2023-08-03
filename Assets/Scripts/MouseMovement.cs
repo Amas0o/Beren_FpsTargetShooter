@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MouseMovement : MonoBehaviour
 {
-    [SerializeField] float sensitivity;
-    Vector2 currentMouseLook;
+    [SerializeField] float sensitivity;    // mouse sensitivity
+    Vector2 currentMouseLook;              // current position
     Vector2 lookAngles;
     float xRotation = 0f;
     void Start()
@@ -45,8 +45,7 @@ public class MouseMovement : MonoBehaviour
         currentMouseLook.x = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
         currentMouseLook.y = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
         xRotation -= currentMouseLook.y;
-        xRotation = Mathf.Clamp(xRotation, -60f, 60f);
-        //Debug.Log("value  " + currentMouseLook.y);
+        xRotation = Mathf.Clamp(xRotation, -60f, 60f);    // maximum vision
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.parent.transform.Rotate(Vector3.up * currentMouseLook.x);
     }

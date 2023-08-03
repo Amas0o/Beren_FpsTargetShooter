@@ -6,12 +6,8 @@ using UnityEngine;
 
 public class WheelOfFortune : MonoBehaviour
 {
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)   // the score is sett according to the position where the wheel is shot
     {
-        
-        //Debug.Log("hit by " + collision.gameObject.name);
         int score;
         switch (gameObject.name)
         {
@@ -26,8 +22,6 @@ public class WheelOfFortune : MonoBehaviour
         script.StopRotation();
         transform.parent.gameObject.GetComponent<WheelSpin>().SetScore(score);
         transform.parent.gameObject.GetComponent<WheelSpin>().Disable();
-        //GameManager.instance.AddToScore(score);
-        //Debug.Log("collision on" + gameObject.name);
     }
         
     

@@ -17,7 +17,6 @@ public class bonusLerp : MonoBehaviour
     {
         referenceObject = GameObject.FindGameObjectWithTag("Player");
         startPos = transform.position;
-        //bonus = false;
     }
 
     // Update is called once per frame
@@ -49,7 +48,6 @@ public class bonusLerp : MonoBehaviour
     {
         
         bonus = true;
-        Debug.Log("Setting bonus to " + bonus);
         scoreBonus = score;
     }
 

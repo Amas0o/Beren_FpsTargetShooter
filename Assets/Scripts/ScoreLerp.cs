@@ -7,17 +7,10 @@ public class ScoreLerp : MonoBehaviour
 {
 
 
-    [SerializeField] float duration;
-    [SerializeField] float lerpDistance;
-    [SerializeField] TextMeshProUGUI text;
+    [SerializeField] float duration;            // duration of the floating score effect
+    [SerializeField] float lerpDistance;        // distance the score(text) travels
+    [SerializeField] TextMeshProUGUI text;      // score 
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         Lerping();
@@ -25,7 +18,7 @@ public class ScoreLerp : MonoBehaviour
 
 
     float timeElapsed = 0f;
-    void Lerping()
+    void Lerping()   // function responsible for the score floating (vertical) effect 
     {
         Vector3 startPos = transform.position;
         if (timeElapsed < duration)
@@ -36,7 +29,7 @@ public class ScoreLerp : MonoBehaviour
         else
             Destroy(gameObject);
     }
-    public void setText(int score) 
+    public void setText(int score) // setting the score text
     {
         if (score < 0)
         {
