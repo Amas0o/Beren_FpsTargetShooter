@@ -92,9 +92,11 @@ public class GameManager : MonoBehaviour
         }
         if (wheelSpawn)
         {
-            prefabInstance = Instantiate(wheelPrefab, new Vector3(3f, 7.54f, -1.75f), Quaternion.Euler(0, 0, 0));
+            x = Random.Range(-6f, 6f);
+            z = Random.Range(-6f, 6f);
+            prefabInstance = Instantiate(wheelPrefab, new Vector3(3f, 7.54f, x), Quaternion.Euler(0, 0, 0));
             instanceList.Add(prefabInstance);
-            prefabInstance = Instantiate(wheelPrefab, new Vector3(-2.64f, 7.54f, -1.75f), Quaternion.Euler(0, 0, 0));
+            prefabInstance = Instantiate(wheelPrefab, new Vector3(-2.64f, 7.54f, z), Quaternion.Euler(0, 0, 0));
             prefabInstance.GetComponent<WheelSpin>().SetisNegative();
             instanceList.Add(prefabInstance);
             wheelSpawn = false;
