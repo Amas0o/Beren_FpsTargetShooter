@@ -28,9 +28,22 @@ public class Variables : MonoBehaviour
     public static float upgradeHealth = 50;                    
     public static float upgradeDeathTime = 4;
 
+    //WheelSpin
+    public static float wheelSpeed = 500;                
+    public static float wheelDeathTime = 10;            
+    public static float wheelBrakeSpeed = 25;
 
-    //bonus Lerp
+
+    //bonusLerp
     public static float bonusLerpDuration = 0.5f;
+
+    //scoreLerp
+    public static float scoreLerpDuration = 0.7f;            
+    public static float scoreLerpDistance = 0.02f;
+
+    //wheelBonusLerp
+    public static float wheelBonusLerpDuration = 0.5f;
+
 
     //Bullet
     public static float bulletDamage = 10;
@@ -72,6 +85,18 @@ public class Variables : MonoBehaviour
     public static float assaultTimeBetweenShots = 0;
     public static int assaultMagazineSize = 100;
     public static int assaultBulletsPerTap = 1;
+
+
+
+    //Mouse Movement
+    public static float mouseSensitivity = 500;
+
+
+    //Player Controller
+    public static float playerSpeed = 5;
+    public static float playerSprintSpeed = 8;
+    public static float playerJumpForce = 4;
+    public static float playerGravity = 10;
 
 
 

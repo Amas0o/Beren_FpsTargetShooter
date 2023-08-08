@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MouseMovement : MonoBehaviour
 {
-    [SerializeField] float sensitivity;    // mouse sensitivity
+    float sensitivity = Variables.mouseSensitivity;    // mouse sensitivity
     Vector2 currentMouseLook;              // current position
     
     float xRotation = 0f;                 // variable to store current x rotation

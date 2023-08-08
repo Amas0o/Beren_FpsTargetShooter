@@ -6,11 +6,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour  // handles player movement
 {
 
-    Vector3 move_direction;                      // player's direction of movement
-    [SerializeField] float speed;                // player's speed
-    [SerializeField] float sprintSpeed;          // player's speed while sprinting
-    [SerializeField] float jumpForce;            // jump force of the player
-    [SerializeField] float gravity;              // contains gravity force applied to player
+    Vector3 move_direction;                             // player's direction of movement
+    float speed = Variables.playerSpeed;                // player's speed
+    float sprintSpeed = Variables.playerSprintSpeed;    // player's speed while sprinting
+    float jumpForce = Variables.playerJumpForce;        // jump force of the player
+    float gravity = Variables.playerGravity;            // contains gravity force applied to player
 
     CharacterController characterController;     // controller script
     float verticalSpeed;                         // variable for current vertical speed

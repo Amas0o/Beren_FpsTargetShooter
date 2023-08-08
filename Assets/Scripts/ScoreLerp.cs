@@ -7,10 +7,10 @@ public class ScoreLerp : MonoBehaviour
 {
 
 
-    [SerializeField] float duration;            // duration of the floating score effect
-    [SerializeField] float lerpDistance;        // distance the score(text) travels
-    [SerializeField] TextMeshProUGUI text;      // score 
-    float timeElapsed = 0f;                     // used to keep track of time passed since object movement
+    float duration = Variables.scoreLerpDuration;           // duration of the floating score effect
+    float lerpDistance = Variables.scoreLerpDistance;       // distance the score(text) travels
+    [SerializeField] TextMeshProUGUI text;                  // score 
+    float timeElapsed = 0f;                                 // used to keep track of time passed since object movement
     void Update() // calls the lerp function to move the player every frame
     {
         Lerping();

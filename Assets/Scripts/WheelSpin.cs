@@ -5,10 +5,10 @@ using static Unity.VisualScripting.Metadata;
 
 public class WheelSpin : MonoBehaviour           //Script to handle WheelOfFortune functionality
 {
-    [SerializeField] float speed;                // rotation speed
-    [SerializeField] float deathTime;            // wheel lifetime
-    [SerializeField] float brakeSpeed;           // decrementation of the rotation speed when the wheel is shot
-    [SerializeField] GameObject ScoreCollect;    // floating visual of the score that the player will gain
+    float speed = Variables.wheelSpeed;                // rotation speed
+    float deathTime = Variables.wheelDeathTime;        // wheel lifetime
+    float brakeSpeed = Variables.wheelBrakeSpeed;      // decrementation of the rotation speed when the wheel is shot
+    [SerializeField] GameObject ScoreCollect;          // floating visual of the score that the player will gain
     
     bool isNegative = false;                     // checking for the negative speed i.e rotating the wheel in the opposite direction
     bool rotation;                               // bolean variable for enabling and disabling rotation

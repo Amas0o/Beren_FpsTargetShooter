@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class WheelBonusLerp : MonoBehaviour
 {
-    [SerializeField] float duration;         // time within which the wheel bonus moves towards the player
+    float duration = Variables.wheelBonusLerpDuration;         // time within which the wheel bonus moves towards the player
     GameObject referenceObject;              // Player
     [SerializeField] TextMeshProUGUI text;   // the bonus
     Vector3 startPos;                        // Start position of the bonus visual i.e the position where wheel is destroyed

@@ -11,6 +11,9 @@ TagManager:
   - Upgrade
   - WheelOfFortune
   - Barrel
+  - pistol
+  - shotgun
+  - assault
   layers:
   - Default
   - TransparentFX

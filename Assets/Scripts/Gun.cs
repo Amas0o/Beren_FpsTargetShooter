@@ -1,19 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
     //bullet 
     [SerializeField] GameObject bullet;
-    
+
+
     //bullet force
-    [SerializeField] float shootForce, upwardForce;
+    float shootForce, upwardForce;
 
     //Gun stats
-    [SerializeField] float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
-    [SerializeField] int magazineSize, bulletsPerTap;
+    float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
+    int magazineSize, bulletsPerTap;
+
+
+
+
     [SerializeField] bool allowButtonHold;
     int bulletsLeft, bulletsShot;
 
@@ -41,10 +47,47 @@ public class Gun : MonoBehaviour
     ObjectPooler pooler;
     private void Awake()
     {
+        if (gameObject.tag == "pistol")
+        {
+            shootForce = Variables.pistolShootForce;
+            upwardForce = Variables.pistolUpwardForce;
+            spread = Variables.pistolSpread;
+            timeBetweenShooting = Variables.pistolTimeBetweenShooting;
+            reloadTime = Variables.pistolReloadTime;
+            timeBetweenShots = Variables.pistolTimeBetweenShots;
+            magazineSize = Variables.pistolMagazineSize;
+            bulletsPerTap = Variables.pistolBulletsPerTap;
+        }
+        else if (gameObject.tag == "shotgun")
+        {
+            shootForce = Variables.shotgunShootForce;
+            upwardForce = Variables.shotgunUpwardForce;
+            spread = Variables.shotgunSpread;
+            timeBetweenShooting = Variables.shotgunTimeBetweenShooting;
+            reloadTime = Variables.shotgunReloadTime;
+            timeBetweenShots = Variables.shotgunTimeBetweenShots;
+            magazineSize = Variables.shotgunMagazineSize;
+            bulletsPerTap = Variables.shotgunBulletsPerTap;
+        }
+
+        else if (gameObject.tag == "assault")
+        {
+            shootForce = Variables.assaultShootForce;
+            upwardForce = Variables.assaultUpwardForce;
+            spread = Variables.assaultSpread;
+            timeBetweenShooting = Variables.assaultTimeBetweenShooting;
+            reloadTime = Variables.assaultReloadTime;
+            timeBetweenShots = Variables.assaultTimeBetweenShots;
+            magazineSize = Variables.assaultMagazineSize;
+            bulletsPerTap = Variables.assaultBulletsPerTap;
+        }
+
+
         //make sure magazine is full
         bulletsLeft = magazineSize;
         readyToShoot = true;
         pooler = ObjectPooler.instance;
+
     }
 
     private void Start() // Initializes shootingSound with the audioSource and disables the laser
