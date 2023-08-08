@@ -14,10 +14,12 @@ public class Target : MonoBehaviour
     float elaspedTime;                                              // time elasped after spawing of the target
     [SerializeField] GameObject scoreVisual;                        // floating visual of the score that the player will gain
     GameObject temp;                                                // temporary variable for instantiating the scoreVisual
+    GameManager gameManager;
     private void Awake()
     {
         // Basic initialization of variables
         maxHealth = health;
+        gameManager = GameManager.instance;
     }
     private void OnEnable()
     {
@@ -61,7 +63,7 @@ public class Target : MonoBehaviour
 
         if (health <= 0)    // when the health reaches zero, target is destroyed and the score is added
         {
-            GameManager.instance.AddToScore(prospectiveScore);
+            gameManager.AddToScore(prospectiveScore);
             temp = Instantiate(scoreVisual, new Vector3(gameObject.transform.position.x  ,gameObject.transform.position.y + 3 , gameObject.transform.position.z), Quaternion.identity);
             temp.GetComponent<ScoreLerp>().setText(prospectiveScore);
             //Destroy(gameObject);

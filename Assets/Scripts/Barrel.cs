@@ -24,7 +24,8 @@ public class Barrel : MonoBehaviour                             // implements ex
     Upgrade upgradeScript;                                      // variable to hold scripts of frenzy bottles/upgrades affected by explosion
     Barrel barrelScript;                                        // variable to hold scripts of other barrels affected by explosion
     Collider[] colliders;                                       // list of colliders to hold objects within coillision radius
-
+    GameManager gameManager;
+    Collider bcollider;
     private void OnEnable()
     {
         //Basic initialization of variables
@@ -40,13 +41,15 @@ public class Barrel : MonoBehaviour                             // implements ex
         {
             Debug.Log("error");
         }
-        gameObject.GetComponent<Collider>().enabled = true;
+        bcollider.enabled = true;
 
     }
 
     private void Awake()
     {
         maxHealth = health;
+        gameManager = GameManager.instance;
+        bcollider = gameObject.GetComponent<Collider>();
     }
 
     public void UpdateInstance()  // Handles all the time related update functionality, called by the master clock
@@ -71,11 +74,11 @@ public class Barrel : MonoBehaviour                             // implements ex
 
         if (health <= 0)  // when the health reaches zero, barrel is destroyed, it deals damage to the surrounding objects and adds to the score
         {
-            gameObject.GetComponent<Collider>().enabled = false;
+            bcollider.enabled = false;
             Explode();
             explosion.Play();
             explosionSound.Play();
-            GameManager.instance.AddToScore(prospectiveScore);
+            gameManager.AddToScore(prospectiveScore);
             temp = Instantiate(scoreVisual, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 3, gameObject.transform.position.z), gameObject.transform.rotation);
             temp.GetComponent<ScoreLerp>().setText(prospectiveScore);
             StartCoroutine("ExplosionDelay");

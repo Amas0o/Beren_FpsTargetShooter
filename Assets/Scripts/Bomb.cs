@@ -16,6 +16,7 @@ public class Bomb : MonoBehaviour                               // implements bo
     [SerializeField] GameObject scoreVisual;                    // floating visual of the score that the player will gain
     GameObject temp;                                            // temporary variable for instantiating the scoreVisual
     
+    GameManager gameManager;
 
     private void OnEnable()
     {
@@ -39,6 +40,7 @@ public class Bomb : MonoBehaviour                               // implements bo
     private void Awake()
     {
         maxHealth = health;
+        gameManager = GameManager.instance;
     }
 
     public void UpdateInstance()  // Handles all the time related update functionality, called by the master clock
@@ -63,7 +65,7 @@ public class Bomb : MonoBehaviour                               // implements bo
 
         if (health <= 0)  // when the health reaches zero, bomb is destroyed and the negative score is added i.e the player loses points
         {   
-            GameManager.instance.AddToScore(prospectiveScore);
+            gameManager.AddToScore(prospectiveScore);
             temp = Instantiate(scoreVisual, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 3, gameObject.transform.position.z), gameObject.transform.rotation);
             temp.GetComponent<ScoreLerp>().setText(prospectiveScore);
             //Destroy(gameObject);

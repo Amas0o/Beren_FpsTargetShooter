@@ -53,4 +53,9 @@ public class Bullet : MonoBehaviour                 // handles functionality of 
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         gameObject.SetActive(false);
     }
+
+    public void Shoot(float shootForce)
+    {
+        gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * shootForce, ForceMode.Impulse);
+    }
 }
