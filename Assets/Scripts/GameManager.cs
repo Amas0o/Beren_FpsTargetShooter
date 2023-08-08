@@ -151,27 +151,27 @@ public class GameManager : MonoBehaviour  // handles target spawning, score, mas
 
         foreach (GameObject item in instanceList)  // calling update instances of each target in the list for the master clock
         {
-            if (item.tag == "Target")
+            if (item.tag == TagHolder.target)
             {
                 item.gameObject.GetComponent<Target>().UpdateInstance();
 
             }
-            if (item.tag == "Bomb")
+            if (item.tag == TagHolder.bomb)
             {
                 item.GetComponent<Bomb>().UpdateInstance();
           
             }
-            if (item.tag == "Upgrade")
+            if (item.tag == TagHolder.upgrade)
             {
                 item.GetComponent<Upgrade>().UpdateInstance();
 
             }
-            if (item.tag == "Barrel")
+            if (item.tag == TagHolder.barrel)
             {
                 item.GetComponent<Barrel>().UpdateInstance();
 
             }
-            if (item.tag == "WheelOfFortune")
+            if (item.tag == TagHolder.wheelOfFortune)
             {
                 item.GetComponent<WheelSpin>().UpdateInstance();
 

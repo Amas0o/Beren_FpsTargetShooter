@@ -17,27 +17,27 @@ public class Bullet : MonoBehaviour                 // handles functionality of 
     private void OnCollisionEnter(Collision collision)  // deals damage to the targets
     {
         // Checks tag of the target hit and gets the relevant script to call the addDamage function on that target
-        if(collision.gameObject.tag == "Target" )
+        if(collision.gameObject.tag == TagHolder.target)
         {
             collision.gameObject.GetComponent<Target>().AddDamage(damage);
 
         }
-        if (collision.gameObject.tag == "Bomb")
+        if (collision.gameObject.tag == TagHolder.bomb)
         {
             collision.gameObject.GetComponent<Bomb>().AddDamage(damage);
 
         }
-        if (collision.gameObject.tag == "Upgrade")
+        if (collision.gameObject.tag == TagHolder.upgrade)
         {
             collision.gameObject.GetComponent<Upgrade>().AddDamage(damage);
 
         }
-        if (collision.gameObject.tag == "Barrel")
+        if (collision.gameObject.tag == TagHolder.barrel)
         {
             collision.gameObject.GetComponent<Barrel>().AddDamage(damage);
 
         }
-        if ((collision.gameObject.tag == "Bullet"))
+        if ((collision.gameObject.tag == TagHolder.bullet))
         {
             return;
         }

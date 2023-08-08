@@ -105,7 +105,7 @@ public class Barrel : MonoBehaviour                             // implements ex
             upgradeScript = null;
             barrelScript = null;
             //Debug.Log("in explosion" + colliders[i].gameObject.name);
-            if (colliders[i].gameObject.tag == "Target")
+            if (colliders[i].gameObject.tag == TagHolder.target)
             {
                 targetScript = colliders[i].gameObject.GetComponent<Target>();
                 if(targetScript != null)
@@ -119,7 +119,7 @@ public class Barrel : MonoBehaviour                             // implements ex
 
 
             }
-            else if (colliders[i].gameObject.tag == "Bomb")
+            else if (colliders[i].gameObject.tag == TagHolder.bomb)
             {
                 bombScript = colliders[i].gameObject.GetComponent<Bomb>();
                 if (bombScript != null)
@@ -132,7 +132,7 @@ public class Barrel : MonoBehaviour                             // implements ex
                 }
 
             }
-            else if (colliders[i].gameObject.tag == "Upgrade")
+            else if (colliders[i].gameObject.tag == TagHolder.upgrade)
             {
                 upgradeScript = colliders[i].gameObject.GetComponent<Upgrade>();
                 if (upgradeScript != null)
@@ -145,7 +145,7 @@ public class Barrel : MonoBehaviour                             // implements ex
                 }
 
             }
-            else if (colliders[i].gameObject.tag == "Barrel")
+            else if (colliders[i].gameObject.tag == TagHolder.barrel)
             {
                 barrelScript = colliders[i].gameObject.GetComponent<Barrel>();
                 if (barrelScript != null)

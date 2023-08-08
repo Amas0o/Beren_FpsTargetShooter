@@ -47,7 +47,7 @@ public class Gun : MonoBehaviour
     ObjectPooler pooler;
     private void Awake()
     {
-        if (gameObject.tag == "pistol")
+        if (gameObject.tag == TagHolder.pistol)
         {
             shootForce = Variables.pistolShootForce;
             upwardForce = Variables.pistolUpwardForce;
@@ -58,7 +58,7 @@ public class Gun : MonoBehaviour
             magazineSize = Variables.pistolMagazineSize;
             bulletsPerTap = Variables.pistolBulletsPerTap;
         }
-        else if (gameObject.tag == "shotgun")
+        else if (gameObject.tag == TagHolder.shotgun)
         {
             shootForce = Variables.shotgunShootForce;
             upwardForce = Variables.shotgunUpwardForce;
@@ -70,7 +70,7 @@ public class Gun : MonoBehaviour
             bulletsPerTap = Variables.shotgunBulletsPerTap;
         }
 
-        else if (gameObject.tag == "assault")
+        else if (gameObject.tag == TagHolder.assault)
         {
             shootForce = Variables.assaultShootForce;
             upwardForce = Variables.assaultUpwardForce;
@@ -158,7 +158,7 @@ public class Gun : MonoBehaviour
 
         //Instantiate bullet/projectile
         //GameObject currentBullet = Instantiate(bullet, attackPoint.position, attackPoint.rotation); //store instantiated bullet in currentBullet
-        GameObject currentBullet = pooler.SpawnFromPool("Bullet" , attackPoint.position, attackPoint.rotation);
+        GameObject currentBullet = pooler.SpawnFromPool(TagHolder.bullet , attackPoint.position, attackPoint.rotation);
         //Rotate bullet to shoot direction
 
         //Add forces to bullet
