@@ -37,11 +37,14 @@ public class Gun : MonoBehaviour
     public ParticleSystem muzzleFlash;
     AudioSource shootingSound;
 
+    //Object pooler
+    ObjectPooler pooler;
     private void Awake()
     {
         //make sure magazine is full
         bulletsLeft = magazineSize;
         readyToShoot = true;
+        pooler = ObjectPooler.instance;
     }
 
     private void Start() // Initializes shootingSound with the audioSource and disables the laser
@@ -111,11 +114,12 @@ public class Gun : MonoBehaviour
         Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0); //Just add spread to last direction
 
         //Instantiate bullet/projectile
-        GameObject currentBullet = Instantiate(bullet, attackPoint.position, attackPoint.rotation); //store instantiated bullet in currentBullet
+        //GameObject currentBullet = Instantiate(bullet, attackPoint.position, attackPoint.rotation); //store instantiated bullet in currentBullet
+        GameObject currentBullet = pooler.SpawnFromPool("Bullet" , attackPoint.position, attackPoint.rotation);
         //Rotate bullet to shoot direction
 
         //Add forces to bullet
-        currentBullet.GetComponent<Rigidbody>().AddForce(currentBullet.transform.forward * shootForce, ForceMode.Impulse);
+        currentBullet.GetComponent<Rigidbody>().AddForce(currentBullet.transform.forward * shootForce, ForceMode.Impulse);//add to bullet script
 
 
         bulletsLeft--;

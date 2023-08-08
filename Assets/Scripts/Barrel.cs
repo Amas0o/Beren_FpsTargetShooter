@@ -10,7 +10,7 @@ public class Barrel : MonoBehaviour                             // implements ex
     float deathTime = Variables.barrelDeathTime;                // barrel lifetime
     float radius = Variables.barrelRadius;                      // radius within which surrounding objects will be damaged
     float damage = Variables.barrelDamage;                      // damage to surrounding objects
-    int prospectiveScore = Variables.barrelProspectiveScore;    // score that the player will gain upon barrel's destruction 
+    int prospectiveScore = Variables.barrelProspectiveScore;    // score that the player will gain upon barrel's destruction
     [SerializeField] ParticleSystem explosion;                  // particle system holding explosion particle effects
     [SerializeField] GameObject scoreVisual;                    // floating visual of the score that the player will gain
     GameObject temp;                                            // temporary variable for instantiating the scoreVisual
@@ -25,35 +25,41 @@ public class Barrel : MonoBehaviour                             // implements ex
     Barrel barrelScript;                                        // variable to hold scripts of other barrels affected by explosion
     Collider[] colliders;                                       // list of colliders to hold objects within coillision radius
 
-    private void Awake()
+    private void OnEnable()
     {
         //Basic initialization of variables
-        maxHealth = health;                                          
+        health = maxHealth;
         healthBar = GetComponentInChildren<HealthBarController>();
         timeBar = GetComponentsInChildren<HealthBarController>()[1];
         healthBar.UpdateHealth(health, maxHealth);                     // initializing health bar at max health
         explosion.transform.position = gameObject.transform.position;  // initializing the position of the explosion effect
         elaspedTime = 0;
+        timeBar.UpdateHealth(deathTime - elaspedTime, deathTime);
         explosionSound = gameObject.GetComponent<AudioSource>();
         if (healthBar == null)
         {
             Debug.Log("error");
         }
-        
-    }
-    
+        gameObject.GetComponent<Collider>().enabled = true;
 
-    
+    }
+
+    private void Awake()
+    {
+        maxHealth = health;
+    }
+
     public void UpdateInstance()  // Handles all the time related update functionality, called by the master clock
     {
         //Increments elaspedTime with time passed in between function calls and updates timeBar bar to reflect that value
-        elaspedTime += Time.deltaTime;         
+        elaspedTime += Time.deltaTime;
         timeBar.UpdateHealth(deathTime - elaspedTime, deathTime);
-        
+
         //Destroys gameObject if lifetime of object has passed
         if (elaspedTime >= deathTime)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+
         }
     }
 
@@ -73,7 +79,7 @@ public class Barrel : MonoBehaviour                             // implements ex
             temp = Instantiate(scoreVisual, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 3, gameObject.transform.position.z), gameObject.transform.rotation);
             temp.GetComponent<ScoreLerp>().setText(prospectiveScore);
             StartCoroutine("ExplosionDelay");
-            
+
         }
     }
 
@@ -82,13 +88,13 @@ public class Barrel : MonoBehaviour                             // implements ex
     IEnumerator ExplosionDelay() //creates a delay between explosion and deletion of gameObject to be able to view the particle effects
     {
         yield return new WaitForSeconds(0.9f);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
     public void Explode() // function responsible for dealing damage to the surrounding objects upon barrel's destruction
     {
-        
+
         colliders = Physics.OverlapSphere(gameObject.transform.position, radius); // generates a radius around gameObject and returns all colliders within that radius
-        
+
         for(int i = 0; i < colliders.Length; i++) //loops over all colliders within explosion radius adding explosion damage to their scripts
         {
             targetScript = null;
@@ -107,7 +113,7 @@ public class Barrel : MonoBehaviour                             // implements ex
                 {
                     Debug.Log("error");
                 }
-                
+
 
             }
             else if (colliders[i].gameObject.tag == "Bomb")
