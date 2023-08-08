@@ -4,12 +4,12 @@ using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
-public class bonusLerp : MonoBehaviour       // implements bonus going to player functionality
+public class bonusLerp : MonoBehaviour                    // implements bonus going to player functionality
 {
-    [SerializeField] float duration;         // specifies the duration in which the bonus reaches the player
-    GameObject referenceObject;              // variable to store player gameObject
-    Vector3 startPos;                        // variable to store this gameObjects start position
-    float timeElapsed = 0f;                  // used to keep track of time passed since object movement
+    float duration = Variables.bonusLerpDuration;         // specifies the duration in which the bonus reaches the player
+    GameObject referenceObject;                           // variable to store player gameObject
+    Vector3 startPos;                                     // variable to store this gameObjects start position
+    float timeElapsed = 0f;                               // used to keep track of time passed since object movement
     void Start()
     {    
         // Basic initialization of variables

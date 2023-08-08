@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour  // handles target spawning, score, mas
     Gun assaultScript;                                    // used to hold assault rifle gun script 
     Gun shotgunScript;                                    // used to hold shotgun gun script
 
-    [SerializeField] float frenzyTime;                    // duration of frenzy upgrade
+    float frenzyTime = Variables.frenzyTime;              // duration of frenzy upgrade
 
     private int score = 0;                                // current score 
     float x = 0;                                          // used to hold temporary cordinates

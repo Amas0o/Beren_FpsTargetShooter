@@ -4,17 +4,17 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-public class Bomb : MonoBehaviour               // implements bomb functionality
+public class Bomb : MonoBehaviour                               // implements bomb functionality
 {
-    [SerializeField] float health;              // health of the bomb
-    [SerializeField] float deathTime;           // lifetime of the bomb
-    [SerializeField] int prospectiveScore;      // score that the player will gain upon bomb's destruction
-    HealthBarController healthBar;              // visual display of current health of the bomb
-    HealthBarController timeBar;                // visual display of the reamaining bomb lifetime
-    float elaspedTime;                          // time elasped after spawing of the bomb
-    float maxHealth;                            // variable to store maxiumum possible health of target
-    [SerializeField] GameObject scoreVisual;    // floating visual of the score that the player will gain
-    GameObject temp;                            // temporary variable for instantiating the scoreVisual
+    float health = Variables.bombHealth;                        // health of the bomb
+    float deathTime = Variables.bombDeathTime;                  // lifetime of the bomb
+    int prospectiveScore = Variables.bombProspectiveScore;      // score that the player will gain upon bomb's destruction
+    HealthBarController healthBar;                              // visual display of current health of the bomb
+    HealthBarController timeBar;                                // visual display of the reamaining bomb lifetime
+    float elaspedTime;                                          // time elasped after spawing of the bomb
+    float maxHealth;                                            // variable to store maxiumum possible health of target
+    [SerializeField] GameObject scoreVisual;                    // floating visual of the score that the player will gain
+    GameObject temp;                                            // temporary variable for instantiating the scoreVisual
     
 
     private void Awake()

@@ -5,19 +5,18 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    [SerializeField] float health;                // health of the target
-    private int prospectiveScore;                 // score that the player will gain upon target's destruction
-    [SerializeField] float deathTime;             // lifetime of the target
-    HealthBarController healthBar;                // visual display of current health of the target
-    HealthBarController timeBar;                  // visual display of the reamaining target lifetime
-    float maxHealth;                              // variable to store maxiumum possible health of target
-    float elaspedTime;                            // time elasped after spawing of the target
-    [SerializeField] GameObject scoreVisual;      // floating visual of the score that the player will gain
-    GameObject temp;                              // temporary variable for instantiating the scoreVisual
+    float health = Variables.targetHealth;                          // health of the target
+    int prospectiveScore = Variables.targetProspectiveScore;        // score that the player will gain upon target's destruction
+    float deathTime = Variables.targetDeathTime;                    // lifetime of the target
+    HealthBarController healthBar;                                  // visual display of current health of the target
+    HealthBarController timeBar;                                    // visual display of the reamaining target lifetime
+    float maxHealth;                                                // variable to store maxiumum possible health of target
+    float elaspedTime;                                              // time elasped after spawing of the target
+    [SerializeField] GameObject scoreVisual;                        // floating visual of the score that the player will gain
+    GameObject temp;                                                // temporary variable for instantiating the scoreVisual
     private void Awake()
     {
         // Basic initialization of variables
-        prospectiveScore = 100;
         maxHealth = health;
         elaspedTime = 0;
         

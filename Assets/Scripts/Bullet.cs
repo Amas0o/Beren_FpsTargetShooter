@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour    // handles functionality of gun bullets
+public class Bullet : MonoBehaviour                 // handles functionality of gun bullets
 {
-    [SerializeField] float deathTime;  // bullet lifetime
-    [SerializeField] float damage;     // damage that the bullet deals to targets
+    float deathTime = Variables.bulletDeathTime;    // bullet lifetime
+    float damage = Variables.bulletDamage;          // damage that the bullet deals to targets
+
+
     private void Start()
     {
         StartCoroutine("Death");       // starts coroutine to delete bullet after deathTime has passed

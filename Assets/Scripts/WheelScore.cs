@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class WheelOfFortune : MonoBehaviour // Script used to determine score when WheelofFortune is shot
 {
-    private void OnCollisionEnter2D(Collision2D collision)   // the score is sett according to the position where the wheel is shot
+    private void OnCollisionEnter2D(Collision2D collision)   // the score is set according to the position where the wheel is shot
     {
         int score;
         

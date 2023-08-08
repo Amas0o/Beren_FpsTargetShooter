@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Upgrade : MonoBehaviour
 {
-    [SerializeField] float health;                    // health of the upgrade
-    [SerializeField] float deathTime;                 // lifetime of the upgrdae
+    float health = Variables.upgradeHealth;           // health of the upgrade
+    float deathTime = Variables.upgradeDeathTime;     // lifetime of the upgrdae
     HealthBarController healthBar;                    // visual display of current health of the upgrade
     HealthBarController timeBar;                      // visual display of the reamaining upgrade lifetime
     float elaspedTime;                                // time elasped after spawing of the upgrade

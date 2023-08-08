@@ -3,26 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Barrel : MonoBehaviour             // implements exploding barrel functionality
+
+public class Barrel : MonoBehaviour                             // implements exploding barrel functionality
 {
-    [SerializeField] float health;              // health of the barrel
-    [SerializeField] float deathTime;           // barrel lifetime
-    [SerializeField] ParticleSystem explosion;  // particle system holding explosion particle effects
-    [SerializeField] float radius;              // radius within which surrounding objects will be damaged
-    [SerializeField] float damage;              // damage to surrounding objects
-    [SerializeField] int prospectiveScore;      // score that the player will gain upon barrel's destruction 
-    [SerializeField] GameObject scoreVisual;    // floating visual of the score that the player will gain
-    GameObject temp;                            // temporary variable for instantiating the scoreVisual
-    float elaspedTime;                          // time elasped after spawing of the barrel
-    HealthBarController healthBar;              // visual display of current health of the barrel
-    HealthBarController timeBar;                // visual display of the reamaining barrel lifetime
-    float maxHealth;                            // maximum health of the target
-    AudioSource explosionSound;                 // variable to hold explosion sound effect
-    Target targetScript;                        // variable to hold scripts of targets affected by explosion
-    Bomb bombScript;                            // variable to hold scripts of bombs affected by explosion
-    Upgrade upgradeScript;                      // variable to hold scripts of frenzy bottles/upgrades affected by explosion
-    Barrel barrelScript;                        // variable to hold scripts of other barrels affected by explosion
-    Collider[] colliders;                       // list of colliders to hold objects within coillision radius
+    float health = Variables.barrelHealth;                      // health of the barrel
+    float deathTime = Variables.barrelDeathTime;                // barrel lifetime
+    float radius = Variables.barrelRadius;                      // radius within which surrounding objects will be damaged
+    float damage = Variables.barrelDamage;                      // damage to surrounding objects
+    int prospectiveScore = Variables.barrelProspectiveScore;    // score that the player will gain upon barrel's destruction 
+    [SerializeField] ParticleSystem explosion;                  // particle system holding explosion particle effects
+    [SerializeField] GameObject scoreVisual;                    // floating visual of the score that the player will gain
+    GameObject temp;                                            // temporary variable for instantiating the scoreVisual
+    float elaspedTime;                                          // time elasped after spawing of the barrel
+    HealthBarController healthBar;                              // visual display of current health of the barrel
+    HealthBarController timeBar;                                // visual display of the reamaining barrel lifetime
+    float maxHealth;                                            // maximum health of the target
+    AudioSource explosionSound;                                 // variable to hold explosion sound effect
+    Target targetScript;                                        // variable to hold scripts of targets affected by explosion
+    Bomb bombScript;                                            // variable to hold scripts of bombs affected by explosion
+    Upgrade upgradeScript;                                      // variable to hold scripts of frenzy bottles/upgrades affected by explosion
+    Barrel barrelScript;                                        // variable to hold scripts of other barrels affected by explosion
+    Collider[] colliders;                                       // list of colliders to hold objects within coillision radius
 
     private void Awake()
     {
