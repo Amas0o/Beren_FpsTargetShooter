@@ -25,25 +25,30 @@ public class Barrel : MonoBehaviour             // implements exploding barrel f
     Collider[] colliders;                       // list of colliders to hold objects within coillision radius
     //cache collioder
 
-    private void Awake()
+    private void OnEnable()
     {
         //Basic initialization of variables
-        maxHealth = health;                                          
+        health = maxHealth;
         healthBar = GetComponentInChildren<HealthBarController>();
         timeBar = GetComponentsInChildren<HealthBarController>()[1];
         healthBar.UpdateHealth(health, maxHealth);                     // initializing health bar at max health
         explosion.transform.position = gameObject.transform.position;  // initializing the position of the explosion effect
         elaspedTime = 0;
+        timeBar.UpdateHealth(deathTime - elaspedTime, deathTime);
         explosionSound = gameObject.GetComponent<AudioSource>();
         if (healthBar == null)
         {
             Debug.Log("error");
         }
-        
-    }
-    
+        gameObject.GetComponent<Collider>().enabled = true;
 
-    
+    }
+
+    private void Awake()
+    {
+        maxHealth = health;
+    }
+
     public void UpdateInstance()  // Handles all the time related update functionality, called by the master clock
     {
         //Increments elaspedTime with time passed in between function calls and updates timeBar bar to reflect that value
@@ -53,7 +58,8 @@ public class Barrel : MonoBehaviour             // implements exploding barrel f
         //Destroys gameObject if lifetime of object has passed
         if (elaspedTime >= deathTime)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            
         }
     }
 
@@ -82,7 +88,7 @@ public class Barrel : MonoBehaviour             // implements exploding barrel f
     IEnumerator ExplosionDelay() //creates a delay between explosion and deletion of gameObject to be able to view the particle effects
     {
         yield return new WaitForSeconds(0.9f);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
     public void Explode() // function responsible for dealing damage to the surrounding objects upon barrel's destruction
     {

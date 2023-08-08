@@ -14,21 +14,26 @@ public class Upgrade : MonoBehaviour
     GameObject temp;                                  // temporary variable for instantiating the duplicate upgrade
 
 
-    private void Awake()
+    private void OnEnable()
     {
         // Basic initialization of variables
-        maxHealth = health;
+        health = maxHealth;
         elaspedTime = 0;
 
         healthBar = GetComponentInChildren<HealthBarController>();
         timeBar = GetComponentsInChildren<HealthBarController>()[1];
         healthBar.UpdateHealth(health, maxHealth);    // initializing health bar at max health
-
+        timeBar.UpdateHealth(deathTime - elaspedTime, deathTime);
         if (healthBar == null)
         {
             Debug.Log("error");
         }
         
+    }
+
+    private void Awake()
+    {
+        maxHealth = health;
     }
 
     public void UpdateInstance()   // Handles all the time related update functionality, called by the master clock
@@ -40,7 +45,8 @@ public class Upgrade : MonoBehaviour
         //Destroys gameObject if lifetime of object has passed
         if (elaspedTime >= deathTime)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
     public void AddDamage(float damage)   // gives damage to the upgrade when shot
@@ -53,7 +59,8 @@ public class Upgrade : MonoBehaviour
         if (health <= 0) 
         {
             temp = Instantiate(upgradeCollect, gameObject.transform.position, gameObject.transform.rotation);
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 

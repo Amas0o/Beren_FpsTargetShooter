@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour    // handles functionality of gun bullets
 {
     [SerializeField] float deathTime;  // bullet lifetime
     [SerializeField] float damage;     // damage that the bullet deals to targets
-    private void Start()
+
+    private void OnEnable()
     {
         StartCoroutine("Death");       // starts coroutine to delete bullet after deathTime has passed
     }
@@ -39,12 +41,15 @@ public class Bullet : MonoBehaviour    // handles functionality of gun bullets
             return;
         }
         
-        Destroy(gameObject);    
+        //Destroy(gameObject);
+        gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        gameObject.SetActive(false);
     }
 
     IEnumerator Death() // bullet is destroyed after a certain time
     {
         yield return new WaitForSeconds(deathTime);
-        Destroy(gameObject);
+        gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        gameObject.SetActive(false);
     }
 }

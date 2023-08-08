@@ -14,22 +14,27 @@ public class Target : MonoBehaviour
     float elaspedTime;                            // time elasped after spawing of the target
     [SerializeField] GameObject scoreVisual;      // floating visual of the score that the player will gain
     GameObject temp;                              // temporary variable for instantiating the scoreVisual
-    private void Awake()
+    private void OnEnable()
     {
         // Basic initialization of variables
         prospectiveScore = 100;
-        maxHealth = health;
+        health = maxHealth;
         elaspedTime = 0;
         
         healthBar = GetComponentInChildren<HealthBarController>();
         timeBar = GetComponentsInChildren<HealthBarController>()[1];
         healthBar.UpdateHealth(health, maxHealth);   // initializing health bar at max health
-
+        timeBar.UpdateHealth(deathTime - elaspedTime, deathTime);
         if (healthBar == null)
         {
             Debug.Log("error");
         }
         
+    }
+
+    private void Awake()
+    {
+        maxHealth = health;
     }
     public void UpdateInstance()    // Handles all the time related update functionality, called by the master clock
     {
@@ -40,7 +45,8 @@ public class Target : MonoBehaviour
         //Destroys gameObject if lifetime of object has passed
         if (elaspedTime >= deathTime)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
@@ -55,7 +61,8 @@ public class Target : MonoBehaviour
             GameManager.instance.AddToScore(prospectiveScore);
             temp = Instantiate(scoreVisual, new Vector3(gameObject.transform.position.x  ,gameObject.transform.position.y + 3 , gameObject.transform.position.z), Quaternion.identity);
             temp.GetComponent<ScoreLerp>().setText(prospectiveScore);
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 

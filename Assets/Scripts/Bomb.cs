@@ -17,16 +17,16 @@ public class Bomb : MonoBehaviour               // implements bomb functionality
     GameObject temp;                            // temporary variable for instantiating the scoreVisual
     
 
-    private void Awake()
+    private void OnEnable()
     {
         // Basic initialization of variables
-        maxHealth = health;
+        health = maxHealth;
         
         healthBar = GetComponentInChildren<HealthBarController>();
         healthBar.UpdateHealth(health, maxHealth);  // initializing health bar at max health
 
         timeBar = GetComponentsInChildren<HealthBarController>()[1];
-
+        timeBar.UpdateHealth(deathTime - elaspedTime, deathTime);
         if (healthBar == null)
         {
             Debug.Log("error");
@@ -35,7 +35,12 @@ public class Bomb : MonoBehaviour               // implements bomb functionality
         elaspedTime = 0;
        
     }
-    
+
+    private void Awake()
+    {
+        maxHealth = health;
+    }
+
     public void UpdateInstance()  // Handles all the time related update functionality, called by the master clock
     {
         //Increments elaspedTime with time passed in between function calls and updates timeBar bar to reflect that value
@@ -45,7 +50,8 @@ public class Bomb : MonoBehaviour               // implements bomb functionality
         //Destroys gameObject if lifetime of object has passed
         if (elaspedTime >= deathTime)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
@@ -60,7 +66,8 @@ public class Bomb : MonoBehaviour               // implements bomb functionality
             GameManager.instance.AddToScore(prospectiveScore);
             temp = Instantiate(scoreVisual, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 3, gameObject.transform.position.z), gameObject.transform.rotation);
             temp.GetComponent<ScoreLerp>().setText(prospectiveScore);
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
    

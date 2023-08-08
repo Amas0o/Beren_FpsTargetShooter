@@ -46,7 +46,8 @@ public class GameManager : MonoBehaviour  // handles target spawning, score, mas
     
     [SerializeField] TextMeshProUGUI scoreDisplay;        // used to hold UI element to show score
     GameObject prefabInstance;                            // temporary gameObject
-    
+
+    ObjectPooler pooler;
     private void Start()
     {
         // Starts all spawner timers
@@ -62,7 +63,7 @@ public class GameManager : MonoBehaviour  // handles target spawning, score, mas
 
         // Initializes instance list
         instanceList = new List<GameObject>();
-        
+        pooler = ObjectPooler.instance;
     }
     private void Update()
     {
@@ -73,7 +74,8 @@ public class GameManager : MonoBehaviour  // handles target spawning, score, mas
             z = Random.Range(-6f, 18f);
             y = Random.Range(-0.6f, 0.6f);
 
-            prefabInstance = Instantiate(targetPrefab, new Vector3(x, y, z), Quaternion.Euler(90, 0, 0));
+            //prefabInstance = Instantiate(targetPrefab, new Vector3(x, y, z), Quaternion.Euler(90, 0, 0));
+            prefabInstance = pooler.SpawnFromPool("Target", new Vector3(x, y, z), Quaternion.Euler(90, 0, 0));
             instanceList.Add(prefabInstance);   // adds newly created target into the instance List
 
             targetSpawn = false;
@@ -87,7 +89,8 @@ public class GameManager : MonoBehaviour  // handles target spawning, score, mas
             z = Random.Range(-6f, 6f);
             y = Random.Range(0f, 1.7f);
 
-            prefabInstance = Instantiate(bombPrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+            //prefabInstance = Instantiate(bombPrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+            prefabInstance = pooler.SpawnFromPool("Bomb", new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
             instanceList.Add(prefabInstance);   // adds newly created target into the instance List
 
             bombSpawn = false;
@@ -101,7 +104,8 @@ public class GameManager : MonoBehaviour  // handles target spawning, score, mas
             z = Random.Range(-6f, 6f);
             y = Random.Range(0f, 1.7f);
 
-            prefabInstance = Instantiate(upgradePrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+            //prefabInstance = Instantiate(upgradePrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+            prefabInstance = pooler.SpawnFromPool("Upgrade", new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
             instanceList.Add(prefabInstance);  // adds newly created target into the instance List
 
             upgradeSpawn = false;
@@ -115,7 +119,8 @@ public class GameManager : MonoBehaviour  // handles target spawning, score, mas
             z = Random.Range(-6f, 6f);
             y = Random.Range(0f, 1.7f);
             
-            prefabInstance = Instantiate(barrelPrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+            //prefabInstance = Instantiate(barrelPrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+            prefabInstance = pooler.SpawnFromPool("Barrel", new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
             instanceList.Add(prefabInstance);  // adds newly created target into the instance List
 
             barrelSpawn = false;
@@ -127,10 +132,12 @@ public class GameManager : MonoBehaviour  // handles target spawning, score, mas
             x = Random.Range(-6f, 6f);
             z = Random.Range(-6f, 6f);
 
-            prefabInstance = Instantiate(wheelPrefab, new Vector3(3f, 7.54f, x), Quaternion.Euler(0, 0, 0));
+            //prefabInstance = Instantiate(wheelPrefab, new Vector3(3f, 7.54f, x), Quaternion.Euler(0, 0, 0));
+            prefabInstance = pooler.SpawnFromPool("WheelOfFortune", new Vector3(3f, 7.54f, x), Quaternion.Euler(0, 0, 0));
             instanceList.Add(prefabInstance);  // adds newly created target into the instance List
 
-            prefabInstance = Instantiate(wheelPrefab, new Vector3(-2.64f, 7.54f, z), Quaternion.Euler(0, 0, 0));
+            //prefabInstance = Instantiate(wheelPrefab, new Vector3(-2.64f, 7.54f, z), Quaternion.Euler(0, 0, 0));
+            prefabInstance = pooler.SpawnFromPool("WheelOfFortune", new Vector3(-2.64f, 7.54f, z), Quaternion.Euler(0, 0, 0));
             prefabInstance.GetComponent<WheelSpin>().SetisNegative(); // negates the speed to make wheel spin in other direction
             instanceList.Add(prefabInstance); // adds newly created target into the instance List
 
@@ -139,7 +146,7 @@ public class GameManager : MonoBehaviour  // handles target spawning, score, mas
         }
 
         scoreDisplay.SetText(score.ToString());  // updates scoreDisplay with the current score
-        instanceList.RemoveAll(IsNull);          // removes all destroyed/Null gameObjects from intance list
+        instanceList.RemoveAll(IsNull);          // removes all destroyed/Null gameObjects from instance list
         
 
         foreach (GameObject item in instanceList)  // calling update instances of each target in the list for the master clock
@@ -239,7 +246,7 @@ public class GameManager : MonoBehaviour  // handles target spawning, score, mas
 
     bool IsNull(GameObject test)   // test for gameObject equals to Null
     {
-        if(test == null)
+        if(test.activeInHierarchy == false)
         {
             return true;
         }

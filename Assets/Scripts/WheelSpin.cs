@@ -15,13 +15,21 @@ public class WheelSpin : MonoBehaviour           //Script to handle WheelOfFortu
     
     int prospectiveScore;                        // score that the player will gain upon when the wheel is shot
     float elaspedTime;                           // holds time elasped 
-    
+    float maxSpeed;
+
     GameObject temp;                             // temporary variable for instantiating the ScoreCollect
-    private void Start()
+    private void OnEnable()
     {
         //Basic initialization of variables
         rotation = true;
         elaspedTime = 0;
+        speed = maxSpeed;
+        Enable();
+    }
+
+    private void Awake()
+    {
+        maxSpeed = speed;
     }
     public void UpdateInstance()   // Handles all the time related update functionality, called by the master clock
     {
@@ -31,7 +39,7 @@ public class WheelSpin : MonoBehaviour           //Script to handle WheelOfFortu
         //Destroys gameObject if lifetime of object has passed
         if (elaspedTime >= deathTime)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
         //Rotates gameobject if rotation is set to true
@@ -51,7 +59,7 @@ public class WheelSpin : MonoBehaviour           //Script to handle WheelOfFortu
                 //Spawns the bonus prefab and destroys gameObject
                 temp = Instantiate(ScoreCollect, gameObject.transform.position, Quaternion.identity);
                 temp.GetComponent<WheelBonusLerp>().SetBonus(prospectiveScore);
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
         
@@ -67,9 +75,17 @@ public class WheelSpin : MonoBehaviour           //Script to handle WheelOfFortu
     {
         foreach (Transform t in transform)
         {
-            Destroy(t.gameObject); 
+            t.gameObject.SetActive(false);
         }
         
+    }
+
+    void Enable()
+    {
+        foreach (Transform t in transform)
+        {
+            t.gameObject.SetActive(true);
+        }
     }
     public void SetScore(int score)  // setting the score according to the position where the wheel is shot
     {
