@@ -38,10 +38,7 @@ public class Target : MonoBehaviour
 
     }
 
-    private void Awake()
-    {
-        maxHealth = health;
-    }
+
     public void UpdateInstance()    // Handles all the time related update functionality, called by the master clock
     {
         //Increments elaspedTime with time passed in between function calls and updates timeBar bar to reflect that value
