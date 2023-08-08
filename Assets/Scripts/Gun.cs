@@ -115,7 +115,7 @@ public class Gun : MonoBehaviour
         //Rotate bullet to shoot direction
 
         //Add forces to bullet
-        currentBullet.GetComponent<Rigidbody>().AddForce(currentBullet.transform.forward * shootForce, ForceMode.Impulse);
+        currentBullet.GetComponent<Rigidbody>().AddForce(currentBullet.transform.forward * shootForce, ForceMode.Impulse);//add to bullet script
 
 
         bulletsLeft--;

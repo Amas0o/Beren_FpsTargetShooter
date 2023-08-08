@@ -23,6 +23,7 @@ public class Barrel : MonoBehaviour             // implements exploding barrel f
     Upgrade upgradeScript;                      // variable to hold scripts of frenzy bottles/upgrades affected by explosion
     Barrel barrelScript;                        // variable to hold scripts of other barrels affected by explosion
     Collider[] colliders;                       // list of colliders to hold objects within coillision radius
+    //cache collioder
 
     private void Awake()
     {
