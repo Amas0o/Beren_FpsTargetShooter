@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -313,14 +313,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 7967829556314082416, guid: 911d6184495cbc44190b2267899bb98b, type: 3}
-  shootForce: 400
-  upwardForce: 0
-  timeBetweenShooting: 0.1
-  spread: 2
-  reloadTime: 1.5
-  timeBetweenShots: 0
-  magazineSize: 100
-  bulletsPerTap: 3
   allowButtonHold: 0
   fpsCam: {fileID: 963194227}
   attackPoint: {fileID: 1061248585}
@@ -783,25 +775,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd26f76cf6465f41b3a0cbf8c676082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pools:
-  - tag: Bullet
-    prefab: {fileID: 7967829556314082416, guid: 911d6184495cbc44190b2267899bb98b, type: 3}
-    size: 20
-  - tag: Target
-    prefab: {fileID: 1501084758933746, guid: 9437be881ad682348bd31aa228922027, type: 3}
-    size: 3
-  - tag: Bomb
-    prefab: {fileID: 2595720090088871617, guid: 732e12a252da64507987819a344450d8, type: 3}
-    size: 1
-  - tag: Upgrade
-    prefab: {fileID: 8327711790066316512, guid: 647d701883c28458a9f74fca6d2c325b, type: 3}
-    size: 1
-  - tag: Barrel
-    prefab: {fileID: 3078870226495961552, guid: 1c0376b8a6290434a90510d832b8aa74, type: 3}
-    size: 1
-  - tag: WheelOfFortune
-    prefab: {fileID: 6431618986216430347, guid: 30a47d68f289dca449e74b91e230025f, type: 3}
-    size: 2
+  BulletPrefab: {fileID: 7967829556314082416, guid: 911d6184495cbc44190b2267899bb98b, type: 3}
+  TargetPrefab: {fileID: 1501084758933746, guid: 9437be881ad682348bd31aa228922027, type: 3}
+  BombPrefab: {fileID: 2595720090088871617, guid: 732e12a252da64507987819a344450d8, type: 3}
+  UpgradePrefab: {fileID: 8327711790066316512, guid: 647d701883c28458a9f74fca6d2c325b, type: 3}
+  BarrelPrefab: {fileID: 3078870226495961552, guid: 1c0376b8a6290434a90510d832b8aa74, type: 3}
+  WheelOfFortunePrefab: {fileID: 6431618986216430347, guid: 30a47d68f289dca449e74b91e230025f, type: 3}
 --- !u!4 &487676170
 Transform:
   m_ObjectHideFlags: 0
@@ -976,14 +955,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 7967829556314082416, guid: 911d6184495cbc44190b2267899bb98b, type: 3}
-  shootForce: 600
-  upwardForce: 0
-  timeBetweenShooting: 0.1
-  spread: 0
-  reloadTime: 1.5
-  timeBetweenShots: 0
-  magazineSize: 100
-  bulletsPerTap: 1
   allowButtonHold: 0
   fpsCam: {fileID: 963194227}
   attackPoint: {fileID: 2027874786}
@@ -2178,10 +2149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 102a97e7052aae344b6a1b4d7544d747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  sprintSpeed: 8
-  jumpForce: 4
-  gravity: 10
 --- !u!1 &1241699085
 GameObject:
   m_ObjectHideFlags: 0
@@ -2227,7 +2194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4521aebfa6f70b468064f7670a19779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 500
 --- !u!1 &1249936641
 GameObject:
   m_ObjectHideFlags: 0
@@ -8602,14 +8568,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 7967829556314082416, guid: 911d6184495cbc44190b2267899bb98b, type: 3}
-  shootForce: 800
-  upwardForce: 0
-  timeBetweenShooting: 0.1
-  spread: 0
-  reloadTime: 1.5
-  timeBetweenShots: 0
-  magazineSize: 100
-  bulletsPerTap: 1
   allowButtonHold: 1
   fpsCam: {fileID: 963194227}
   attackPoint: {fileID: 1236445377}
