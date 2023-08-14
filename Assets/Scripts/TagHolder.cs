@@ -5,19 +5,19 @@ using UnityEngine;
 public class TagHolder : MonoBehaviour
 {
     //string constants and names are uppercase
-    public static string respawn = "Respawn";
-    public static string finish = "Finish";
-    public static string editorOnly = "EditorOnly";
-    public static string mainCamera = "MainCamera";
-    public static string player = "Player";
-    public static string gameController = "GameController";
-    public static string target = "Target";
-    public static string bullet = "Bullet";
-    public static string bomb = "Bomb";
-    public static string upgrade = "Upgrade";
-    public static string wheelOfFortune = "WheelOfFortune";
-    public static string barrel = "Barrel";
-    public static string pistol = "pistol";
-    public static string shotgun = "shotgun";
-    public static string assault = "assault";
+    public const string respawn = "Respawn";
+    public const string finish = "Finish";
+    public const string editorOnly = "EditorOnly";
+    public const string mainCamera = "MainCamera";
+    public const string player = "Player";
+    public const string gameController = "GameController";
+    public const string target = "Target";
+    public const string bullet = "Bullet";
+    public const string bomb = "Bomb";
+    public const string upgrade = "Upgrade";
+    public const string wheelOfFortune = "WheelOfFortune";
+    public const string barrel = "Barrel";
+    public const string pistol = "pistol";
+    public const string shotgun = "shotgun";
+    public const string assault = "assault";
 }
