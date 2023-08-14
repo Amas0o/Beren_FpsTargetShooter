@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Variables : MonoBehaviour
 {
-
+    //makke them const and start with uppercase
     //Target
     public static float targetHealth = 50;                
     public static int targetProspectiveScore = 100;                 
@@ -98,8 +98,26 @@ public class Variables : MonoBehaviour
     public static float playerJumpForce = 4;
     public static float playerGravity = 10;
 
+    //Object Pooler
+    public static int poolNum = 6;
 
+    public static string pool1Tag = "Bullet";
+    public static int pool1Size = 20;
 
+    public static string pool2Tag = "Target";
+    public static int pool2Size = 3;
+
+    public static string pool3Tag = "Bomb";
+    public static int pool3Size = 1;
+
+    public static string pool4Tag = "Upgrade";
+    public static int pool4Size = 1;
+
+    public static string pool5Tag = "Barrel";
+    public static int pool5Size = 1;
+
+    public static string pool6Tag = "WheelOfFortune";
+    public static int pool6Size = 2;
 
 
 

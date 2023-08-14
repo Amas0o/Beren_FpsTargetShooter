@@ -4,29 +4,74 @@ using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
 {
-    [System.Serializable]
+
+    [SerializeField] GameObject BulletPrefab;
+    [SerializeField] GameObject TargetPrefab;
+    [SerializeField] GameObject BombPrefab;
+    [SerializeField] GameObject UpgradePrefab;
+    [SerializeField] GameObject BarrelPrefab;
+    [SerializeField] GameObject WheelOfFortunePrefab;
+
+    public static ObjectPooler instance;
     public class Pool
     {
-        public string tag;
-        public GameObject prefab;
-        public int size;
-    }
+        string tag;
+        GameObject prefab;
+        int size;
 
-    public List<Pool> pools;
-    public Dictionary<string, Queue<GameObject>> poolDictionary;
-
-    #region Singleton
-    public static ObjectPooler instance;
-
-    private void Awake()
-    {
-        if(instance == null)
+        public Pool(string tag, GameObject prefab, int size)
         {
-            instance = this;
+            this.tag = tag;
+            this.prefab = prefab;
+            this.size = size;
+        }
+
+        public int getSize()
+        {
+            return this.size;
+        }
+
+        public GameObject getPrefab()
+        {
+            return this.prefab;
+        }
+
+        public string getTag()
+        {
+            return this.tag;
         }
     }
 
-    #endregion 
+    
+
+
+    void Awake()
+    {
+
+        if (instance == null)
+        {
+            instance = this;
+        }
+
+        pools = new List<Pool>
+        {
+            new Pool(Variables.pool1Tag, BulletPrefab, Variables.pool1Size),
+            new Pool(Variables.pool2Tag, TargetPrefab, Variables.pool2Size),
+            new Pool(Variables.pool3Tag, BombPrefab, Variables.pool3Size),
+            new Pool(Variables.pool4Tag, UpgradePrefab, Variables.pool4Size),
+            new Pool(Variables.pool5Tag, BarrelPrefab, Variables.pool5Size),
+            new Pool(Variables.pool6Tag, WheelOfFortunePrefab, Variables.pool6Size)
+        };
+
+    }
+
+    List<Pool> pools;
+    public Dictionary<string, Queue<GameObject>> poolDictionary;
+
+
+    
+
+
    
 
     void Start()
@@ -37,14 +82,14 @@ public class ObjectPooler : MonoBehaviour
         {
             Queue<GameObject> objectPool = new Queue<GameObject>();
 
-            for(int i  = 0; i < pool.size; i++)
+            for(int i  = 0; i < pool.getSize(); i++)
             {
-                GameObject temp = Instantiate(pool.prefab);
+                GameObject temp = Instantiate(pool.getPrefab());
                 temp.SetActive(false);
                 objectPool.Enqueue(temp);
             }
 
-            poolDictionary.Add(pool.tag, objectPool);
+            poolDictionary.Add(pool.getTag(), objectPool);
         }
     }
 

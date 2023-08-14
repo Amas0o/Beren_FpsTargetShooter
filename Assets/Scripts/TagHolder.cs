@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TagHolder : MonoBehaviour
 {
+    //string constants and names are uppercase
     public static string respawn = "Respawn";
     public static string finish = "Finish";
     public static string editorOnly = "EditorOnly";
