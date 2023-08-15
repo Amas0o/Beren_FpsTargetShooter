@@ -105,19 +105,19 @@ public class Variables : MonoBehaviour
     public const int pool1Size = 20;
 
     public const string pool2Tag = "Target";
-    public const int pool2Size = 3;
+    public const int pool2Size = 5;
 
     public const string pool3Tag = "Bomb";
-    public const int pool3Size = 1;
+    public const int pool3Size = 3;
 
     public const string pool4Tag = "Upgrade";
-    public const int pool4Size = 1;
+    public const int pool4Size = 3;
 
     public const string pool5Tag = "Barrel";
-    public const int pool5Size = 1;
+    public const int pool5Size = 3;
 
     public const string pool6Tag = "WheelOfFortune";
-    public const int pool6Size = 2;
+    public const int pool6Size = 4;
 
 
 

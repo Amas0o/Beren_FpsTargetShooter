@@ -33,12 +33,12 @@ public class GameManager : MonoBehaviour  // handles target spawning, score, mas
     float z = 0;                                          // used to hold temporary cordinates
     float y = 0;                                          // used to hold temporary cordinates
 
-    bool targetSpawn = true;                              // boolean variable to check if the target should be spawned
+    /*bool targetSpawn = true;                              // boolean variable to check if the target should be spawned
     bool barrelSpawn = false;                             // boolean variable to check if the barrel should be spawned
     bool bombSpawn = false;                               // boolean variable to check if the bomb should be spawned
     bool upgradeSpawn = false;                            // boolean variable to check if the upgrade(bottle) should be spawned
-    bool wheelSpawn = true;                               // boolean variable to check if the wheel of fortune should be spawned
-    
+    bool wheelSpawn = true;*/                               // boolean variable to check if the wheel of fortune should be spawned
+
     float targetSpawnTime;                                // time after which new target is spawned
     float barrelSpawnTime;                                // time after which new barrel is spawned
     float bombSpawnTime;                                  // time after which new bomb is spawned
@@ -227,5 +227,71 @@ public class GameManager : MonoBehaviour  // handles target spawning, score, mas
         {
             return false;
         }
+    }
+
+
+    //Spawning trigger functions 
+    public void spawnTarget()
+    {
+        // Assigns random cordinates in the specified range
+        x = Random.Range(-3.85f, 4.85f);
+        z = Random.Range(-6f, 18f);
+        y = Random.Range(-0.6f, 0.6f);
+
+        //prefabInstance = Instantiate(targetPrefab, new Vector3(x, y, z), Quaternion.Euler(90, 0, 0));
+        prefabInstance = pooler.SpawnFromPool(TagHolder.target, new Vector3(x, y, z), Quaternion.Euler(90, 0, 0));
+        instanceList.Add(prefabInstance);   // adds newly created target into the instance List
+    }
+
+    public void spawnBomb()
+    {
+        // Assigns random cordinates in the specified range
+        x = Random.Range(-3.85f, 4.85f);
+        z = Random.Range(-6f, 6f);
+        y = Random.Range(0f, 1.7f);
+
+        //prefabInstance = Instantiate(bombPrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+        prefabInstance = pooler.SpawnFromPool(TagHolder.bomb, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+        instanceList.Add(prefabInstance);   // adds newly created target into the instance List
+    }
+
+    public void spawnUpgrade() 
+    {
+        // Assigns random cordinates in the specified range
+        x = Random.Range(-3.85f, 4.85f);
+        z = Random.Range(-6f, 6f);
+        y = Random.Range(0f, 1.7f);
+
+        //prefabInstance = Instantiate(upgradePrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+        prefabInstance = pooler.SpawnFromPool(TagHolder.upgrade, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+        instanceList.Add(prefabInstance);  // adds newly created target into the instance List
+    }
+
+    public void spawnBarrel()
+    {
+        // Assigns random cordinates in the specified range
+        x = Random.Range(-3.85f, 4.85f);
+        z = Random.Range(-6f, 6f);
+        y = Random.Range(0f, 1.7f);
+
+        //prefabInstance = Instantiate(barrelPrefab, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+        prefabInstance = pooler.SpawnFromPool(TagHolder.barrel, new Vector3(x, y, z), Quaternion.Euler(0, 0, 0));
+        instanceList.Add(prefabInstance);  // adds newly created target into the instance List
+    }
+
+    public void spawnWheel()
+    {
+        // Assigns random cordinates in the specified range (here x and z both are used to specify the z cordinate)
+        x = Random.Range(-6f, 6f);
+        z = Random.Range(-6f, 6f);
+
+        //prefabInstance = Instantiate(wheelPrefab, new Vector3(3f, 7.54f, x), Quaternion.Euler(0, 0, 0));
+        prefabInstance = pooler.SpawnFromPool(TagHolder.wheelOfFortune, new Vector3(3f, 7.54f, x), Quaternion.Euler(0, 0, 0));
+        instanceList.Add(prefabInstance);  // adds newly created target into the instance List
+
+        //prefabInstance = Instantiate(wheelPrefab, new Vector3(-2.64f, 7.54f, z), Quaternion.Euler(0, 0, 0));
+        prefabInstance = pooler.SpawnFromPool(TagHolder.wheelOfFortune, new Vector3(-2.64f, 7.54f, z), Quaternion.Euler(0, 0, 0));
+        prefabInstance.GetComponent<WheelSpin>().SetisNegative(); // negates the speed to make wheel spin in other direction
+        instanceList.Add(prefabInstance); // adds newly created target into the instance List
     }
 }
